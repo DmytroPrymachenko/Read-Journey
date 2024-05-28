@@ -11,6 +11,7 @@ import { selectIsLoading } from "../../store/auth/selectors";
 import { Link, useNavigate } from "react-router-dom";
 import { Loader } from "../../components/Loader/Loader";
 import SvgFavicon from "../../images/favicon/SvgFavicon";
+import { Container } from "../Layout/Layout.Styled";
 
 const schema = yup.object({
   name: yup.string().required("The name is required"),
@@ -53,50 +54,52 @@ export const Register = () => {
   return (
     <>
       {isLoading && <Loader />}
-      <div>
-        <SvgFavicon />
-        <p>read journey</p>
-      </div>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <Container>
         <div>
-          <h1>Registration</h1>
-          <p>
-            Thank you for your interest in our platform! In order to register,
-            we need some information. Please provide us with the following
-            information.
-          </p>
+          <SvgFavicon />
+          <p>read journey</p>
         </div>
-        <div>
-          <label>
-            <input placeholder="Name" type="text" {...register("name")} />
-            <span>{errors.name?.message}</span>
-          </label>
-          <label>
-            <input placeholder="Email" type="text" {...register("email")} />
-            <span>{errors.email?.message}</span>
-          </label>
-          <label>
-            <input
-              placeholder="Password"
-              type={eye ? "text" : "password"}
-              {...register("password")}
-            />
-            <span>{errors.password?.message}</span>
-            <button
-              type="button"
-              onClick={() => setEye(!eye)}
-              aria-label="show or hide password"
-            >
-              {eye ? <EyeOpenSvg /> : <EyeCloseSvg />}
-            </button>
-          </label>
-        </div>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div>
+            <h1>Registration</h1>
+            <p>
+              Thank you for your interest in our platform! In order to register,
+              we need some information. Please provide us with the following
+              information.
+            </p>
+          </div>
+          <div>
+            <label>
+              <input placeholder="Name" type="text" {...register("name")} />
+              <span>{errors.name?.message}</span>
+            </label>
+            <label>
+              <input placeholder="Email" type="text" {...register("email")} />
+              <span>{errors.email?.message}</span>
+            </label>
+            <label>
+              <input
+                placeholder="Password"
+                type={eye ? "text" : "password"}
+                {...register("password")}
+              />
+              <span>{errors.password?.message}</span>
+              <button
+                type="button"
+                onClick={() => setEye(!eye)}
+                aria-label="show or hide password"
+              >
+                {eye ? <EyeOpenSvg /> : <EyeCloseSvg />}
+              </button>
+            </label>
+          </div>
 
-        <button name="submit" type="submit" aria-label="Sign Up">
-          Registration
-        </button>
-        <Link to={"/login"}>Already have an account?</Link>
-      </form>
+          <button name="submit" type="submit" aria-label="Sign Up">
+            Registration
+          </button>
+          <Link to={"/login"}>Already have an account?</Link>
+        </form>
+      </Container>
     </>
   );
 };
