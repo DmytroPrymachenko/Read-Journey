@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { api, clearToken, setToken } from "../../api/api";
+import { api, clearToken, setRefreshToken, setToken } from "../../api/api";
 
 export const signUpThunk = createAsyncThunk(
   "auth/signUp",
@@ -64,6 +64,37 @@ export const logoutThunk = createAsyncThunk(
       return thunkAPI.rejectWithValue(
         error.response.data.message ?? error.message
       );
+    }
+  }
+);
+
+export const refreshTokensThunk = createAsyncThunk(
+  "auth/refreshTokens",
+  async (_, thunkAPI) => {
+    try {
+      const refreshToken = thunkAPI.getState().auth.refreshToken;
+
+      if (!refreshToken) {
+        return thunkAPI.rejectWithValue("Refresh token does not exist");
+      }
+
+      const { data } = await api.get("users/current/refresh");
+      setToken(data.token);
+      setRefreshToken(data.refreshToken);
+
+      return data;
+    } catch (error) {
+      if (
+        error.response &&
+        error.response.data &&
+        error.response.data.message
+      ) {
+        return thunkAPI.rejectWithValue(error.response.data.message);
+      } else {
+        return thunkAPI.rejectWithValue(
+          "An error occurred while refreshing tokens"
+        );
+      }
     }
   }
 );
