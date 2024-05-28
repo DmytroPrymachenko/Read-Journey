@@ -1,6 +1,6 @@
 import { Suspense, useEffect, useState } from "react";
 
-import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import Layout from "./components/Layout/Layout";
 // import IsLoading from "../IsLoading/IsLoading";
 import Home from "./pages/Home/Home";
@@ -19,12 +19,12 @@ import { currentThunk } from "./store/auth/operations";
 import { useDispatch, useSelector } from "react-redux";
 import { selectUser } from "./store/auth/selectors";
 import PublicRoute from "./routes/PublicRoute";
+import PrivateRoute from "./routes/PrivateRoute";
 
 function App() {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
   const { pathname } = useLocation();
-  const navigate = useNavigate();
 
   const [location, setLocation] = useState(pathname);
 
@@ -45,7 +45,14 @@ function App() {
       <Suspense fallback={<Loader />}>
         <Routes>
           <Route element={<Layout />}>
-            <Route path="/" element={<Home />} />
+            <Route
+              path="/"
+              element={
+                <PrivateRoute>
+                  <Home />
+                </PrivateRoute>
+              }
+            />
             <Route path="/recommended" element={<Recommended />} />
             <Route path="/library" element={<Library />} />
             <Route path="/reading" element={<Reading />} />
