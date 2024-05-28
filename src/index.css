@@ -1,6 +1,6 @@
 @import "modern-normalize/modern-normalize.css";
 
-@import "./fonts/fonts.css";
+@import "./styles/fonts/fonts.css";
 
 body {
   background-color: #141414;
