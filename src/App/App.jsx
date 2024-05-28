@@ -1,20 +1,20 @@
 import { Suspense } from "react";
 
 import { Route, Routes } from "react-router-dom";
-import Layout from "../Layout/Layout";
+import Layout from "../components/Layout/Layout";
 // import IsLoading from "../IsLoading/IsLoading";
-import Home from "../../pages/Home/Home";
-import Recommended from "../../pages/Recommended/Recommended";
-import Library from "../../pages/Library/Library";
-import ErrorPage from "../../pages/ErrorPage/ErrorPage";
-import Reading from "../../pages/Reading/Reading";
+import Home from "../pages/Home/Home";
+import Recommended from "../pages/Recommended/Recommended";
+import Library from "../pages/Library/Library";
+import ErrorPage from "../pages/ErrorPage/ErrorPage";
+import Reading from "../pages/Reading/Reading";
 // import Register from "../../pages/Authorization/Register/Register";
 // import Login from "../../pages/Authorization/Login/Login";
-import PrivateRoute from "../../routes/PrivateRoute";
-import { Loader } from "../Loader/Loader";
-import RegisterPage from "../../pages/RegisterPage/RegisterPage";
-import LoginPage from "../../pages/LoginPage/LoginPage";
-import PublicRoute from "../../routes/PublicRoute";
+import PrivateRoute from "../routes/PrivateRoute";
+import { Loader } from "../components/Loader/Loader";
+import RegisterPage from "../pages/RegisterPage/RegisterPage";
+import LoginPage from "../pages/LoginPage/LoginPage";
+import PublicRoute from "../routes/PublicRoute";
 
 function App() {
   // const user = "Test";
