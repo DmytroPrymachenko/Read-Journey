@@ -1,6 +1,6 @@
-import { Suspense, useEffect } from "react";
+import { Suspense, useEffect, useState } from "react";
 
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import Layout from "./components/Layout/Layout";
 // import IsLoading from "../IsLoading/IsLoading";
 import Home from "./pages/Home/Home";
@@ -18,19 +18,28 @@ import LoginPage from "./pages/LoginPage/LoginPage";
 import { currentThunk } from "./store/auth/operations";
 import { useDispatch, useSelector } from "react-redux";
 import { selectUser } from "./store/auth/selectors";
+import PublicRoute from "./routes/PublicRoute";
 
 function App() {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
-  const location = useLocation();
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
+
+  const [location, setLocation] = useState(pathname);
+
+  useEffect(() => {
+    setLocation(pathname);
+  }, [pathname, location]);
+
   console.log(user);
   useEffect(() => {
-    const isLoggedIn = !!user;
-    console.log(isLoggedIn);
-    if (!isLoggedIn && location.pathname === "/recommended") {
-      dispatch(currentThunk());
+    if (!user) {
+      dispatch(currentThunk()).catch((error) => {
+        console.error("Error fetching user data:", error);
+      });
     }
-  }, [dispatch, location.pathname, user]);
+  }, [dispatch, user]);
   return (
     <>
       <Suspense fallback={<Loader />}>
@@ -41,12 +50,26 @@ function App() {
             <Route path="/library" element={<Library />} />
             <Route path="/reading" element={<Reading />} />
           </Route>
-          {!user && (
-            <>
-              <Route path="/register" element={<RegisterPage />} />
-              <Route path="/login" element={<LoginPage />} />
-            </>
-          )}
+
+          <>
+            <Route
+              path="/register"
+              element={
+                <PublicRoute>
+                  <RegisterPage />
+                </PublicRoute>
+              }
+            />
+
+            <Route
+              path="/login"
+              element={
+                <PublicRoute>
+                  <LoginPage />
+                </PublicRoute>
+              }
+            />
+          </>
           <Route path="*" element={<ErrorPage />} />
         </Routes>
       </Suspense>
