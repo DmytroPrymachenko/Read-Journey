@@ -17,7 +17,9 @@ import LoginPage from "../pages/LoginPage/LoginPage";
 import PublicRoute from "../routes/PublicRoute";
 
 function App() {
-  const user = "Test";
+  const user = "Test232324234234";
+  const user2 = "Test232324234234";
+  const user3 = "Test232324234234";
 
   return (
     <>
