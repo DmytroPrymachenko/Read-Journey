@@ -6,18 +6,17 @@ import EyeCloseSvg from "../../images/EyeCloseSvg";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { useState } from "react";
-import { signUpThunk } from "../../store/auth/operations";
+import { Loader } from "../Loader/Loader";
+import { signInThunk } from "../../store/auth/operations";
 import { selectIsLoading } from "../../store/auth/selectors";
 import { Link, useNavigate } from "react-router-dom";
-import { Loader } from "../../components/Loader/Loader";
 import SvgFavicon from "../../images/favicon/SvgFavicon";
 
 const schema = yup.object({
-  name: yup.string().required("The name is required"),
   email: yup
     .string()
     .email("Please write a valid email")
-    .matches(/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/, "Please write a valid email")
+    .matches(/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/)
     .required("The email is required"),
   password: yup
     .string()
@@ -25,7 +24,7 @@ const schema = yup.object({
     .required("The password is required"),
 });
 
-export const Register = () => {
+export const Login = () => {
   const isLoading = useSelector(selectIsLoading);
   const [eye, setEye] = useState(false);
   const dispatch = useDispatch();
@@ -40,14 +39,16 @@ export const Register = () => {
     resolver: yupResolver(schema),
   });
 
-  function onSubmit({ email, password, name }) {
-    dispatch(signUpThunk({ email, password, name }))
+  function onSubmit({ email, password }) {
+    dispatch(signInThunk({ email, password }))
       .unwrap()
       .then(() => {
-        toast.success("Sign up done!");
+        toast.success(`Welcome`);
         navigate("/recommended");
       })
-      .catch(() => toast.error("Ooops... Something went wrong!"));
+      .catch((err) => {
+        toast.error(err);
+      });
   }
 
   return (
@@ -58,26 +59,23 @@ export const Register = () => {
         <p>read journey</p>
       </div>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div>
-          <h1>Registration</h1>
-          <p>
-            Thank you for your interest in our platform! In order to register,
-            we need some information. Please provide us with the following
-            information.
+        {/* <div> */}
+        <h1>
+          Expand your mind, reading <span> a book</span>
+        </h1>
+        {/* <p>
+            Welcome back! Please enter your credentials to access your account
+            and continue your search for a psychologist.
           </p>
-        </div>
+        </div> */}
         <div>
           <label>
-            <input placeholder="Name" type="text" {...register("name")} />
-            <span>{errors.name?.message}</span>
-          </label>
-          <label>
-            <input placeholder="Email" type="text" {...register("email")} />
+            <input placeholder="Mail:" type="text" {...register("email")} />
             <span>{errors.email?.message}</span>
           </label>
           <label>
             <input
-              placeholder="Password"
+              placeholder="Password:"
               type={eye ? "text" : "password"}
               {...register("password")}
             />
@@ -91,11 +89,12 @@ export const Register = () => {
             </button>
           </label>
         </div>
-
-        <button name="submit" type="submit" aria-label="Sign Up">
-          Registration
-        </button>
-        <Link to={"/login"}>Already have an account?</Link>
+        <div>
+          <button name="submit" type="submit" aria-label="Log In">
+            Log In
+          </button>
+          <Link to={"/register"}>Don’t have an account?</Link>
+        </div>
       </form>
     </>
   );
