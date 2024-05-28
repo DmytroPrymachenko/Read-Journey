@@ -17,7 +17,7 @@ import LoginPage from "../pages/LoginPage/LoginPage";
 import PublicRoute from "../routes/PublicRoute";
 
 function App() {
-  // const user = "Test";
+  const user = "Test";
 
   return (
     <>
