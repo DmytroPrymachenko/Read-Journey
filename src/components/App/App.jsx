@@ -1,84 +1,88 @@
 import { Suspense } from "react";
 
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Layout from "../Layout/Layout";
-import IsLoading from "../IsLoading/IsLoading";
+// import IsLoading from "../IsLoading/IsLoading";
 import Home from "../../pages/Home/Home";
 import Recommended from "../../pages/Recommended/Recommended";
 import Library from "../../pages/Library/Library";
 import ErrorPage from "../../pages/ErrorPage/ErrorPage";
 import Reading from "../../pages/Reading/Reading";
-import Register from "../../pages/Authorization/Register/Register";
-import Login from "../../pages/Authorization/Login/Login";
-import PrivateRoute from "../PrivateRoute/PrivateRoute";
+// import Register from "../../pages/Authorization/Register/Register";
+// import Login from "../../pages/Authorization/Login/Login";
+import PrivateRoute from "../../routes/PrivateRoute";
+import { Loader } from "../Loader/Loader";
+import RegisterPage from "../../pages/RegisterPage/RegisterPage";
+import LoginPage from "../../pages/LoginPage/LoginPage";
+import PublicRoute from "../../routes/PublicRoute";
 
 function App() {
-  const user = "Test";
+  // const user = "Test";
 
   return (
     <>
-      <Routes>
-        <Route element={<Layout />}>
-          <Route
-            path="/"
-            element={
-              <Suspense fallback={<IsLoading />}>
-                <PrivateRoute user={user}>
+      <Suspense fallback={<Loader />}>
+        <Routes>
+          <Route element={<Layout />}>
+            <Route
+              path="/"
+              element={
+                <PrivateRoute>
                   <Home />
                 </PrivateRoute>
-              </Suspense>
-            }
-          />
-          <Route
-            path="/recommended"
-            element={
-              <Suspense fallback={<IsLoading />}>
-                <PrivateRoute user={user}>
+              }
+            />
+            <Route
+              path="/recommended"
+              element={
+                // <Suspense fallback={<IsLoading />}>
+                <PrivateRoute>
                   <Recommended />
                 </PrivateRoute>
-              </Suspense>
-            }
-          />
-          <Route
-            path="/library"
-            element={
-              <Suspense fallback={<IsLoading />}>
-                <PrivateRoute user={user}>
+                // </Suspense>
+              }
+            />
+            <Route
+              path="/library"
+              element={
+                // <Suspense fallback={<IsLoading />}>
+                <PrivateRoute>
                   <Library />
                 </PrivateRoute>
-              </Suspense>
+                // </Suspense>
+              }
+            />
+            <Route
+              path="/reading"
+              element={
+                // <Suspense fallback={<IsLoading />}>
+                <PrivateRoute>
+                  <Reading />
+                </PrivateRoute>
+                // </Suspense>
+              }
+            />
+          </Route>
+
+          <Route
+            path="/register"
+            element={
+              <PublicRoute>
+                <RegisterPage />
+              </PublicRoute>
             }
           />
           <Route
-            path="/reading"
+            path="/login"
             element={
-              <Suspense fallback={<IsLoading />}>
-                <PrivateRoute user={user}>
-                  <Reading />
-                </PrivateRoute>
-              </Suspense>
+              <PublicRoute>
+                <LoginPage />
+              </PublicRoute>
             }
           />
-        </Route>
-
-        <Route
-          path="/register"
-          element={
-            <Suspense fallback={<IsLoading />}>
-              {!user ? <Register /> : <Navigate to="/" />}
-            </Suspense>
-          }
-        />
-        <Route
-          path="/login"
-          element={
-            <Suspense fallback={<IsLoading />}>
-              {!user ? <Login /> : <Navigate to="/" />}
-            </Suspense>
-          }
-        />
-        <Route path="*" element={<ErrorPage />} />
-      </Routes>
+          <Route path="*" element={<ErrorPage />} />
+        </Routes>
+      </Suspense>
     </>
   );
 }
