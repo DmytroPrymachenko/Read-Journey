@@ -4,7 +4,7 @@ import { Route, Routes, useLocation } from "react-router-dom";
 import Layout from "./components/Layout/Layout";
 // import IsLoading from "../IsLoading/IsLoading";
 import Home from "./pages/Home/Home";
-import Recommended from "./pages/Recommended/Recommended";
+
 import Library from "./pages/Library/Library";
 import ErrorPage from "./pages/ErrorPage/ErrorPage";
 import Reading from "./pages/Reading/Reading";
@@ -20,6 +20,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectUser } from "./store/auth/selectors";
 import PublicRoute from "./routes/PublicRoute";
 import PrivateRoute from "./routes/PrivateRoute";
+import RecommendedPage from "./pages/RecommendedPage/RecommendedPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -53,7 +54,7 @@ function App() {
                 </PrivateRoute>
               }
             />
-            <Route path="/recommended" element={<Recommended />} />
+            <Route path="/recommended" element={<RecommendedPage />} />
             <Route path="/library" element={<Library />} />
             <Route path="/reading" element={<Reading />} />
           </Route>

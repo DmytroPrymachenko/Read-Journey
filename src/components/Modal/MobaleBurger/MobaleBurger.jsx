@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import {
   BurgerButtonExit,
   BurgerButtonLogAut,
@@ -6,7 +5,10 @@ import {
   BurgerContainer,
   BurgerContainerContant,
   BurgerExit,
+  BurgerLinkWraper,
+  HeaderLink,
 } from "./MobaleBurger.Styled";
+import ExitSVG from "../../../images/ExitSVG";
 
 const MobaleBurger = ({ isOpen, handleLogout, closeModal }) => {
   return (
@@ -14,24 +16,26 @@ const MobaleBurger = ({ isOpen, handleLogout, closeModal }) => {
       <BurgerContainer className={isOpen ? "open" : ""}>
         <BurgerContainerContant>
           <BurgerExit>
-            <BurgerButtonExit onClick={closeModal}>exit</BurgerButtonExit>
+            <BurgerButtonExit onClick={closeModal}>
+              <ExitSVG />
+            </BurgerButtonExit>
           </BurgerExit>
-          <div>
-            <Link
-              to="/"
-              aria-label="logo and return to the main page"
+          <BurgerLinkWraper>
+            <HeaderLink
+              to="/recommended"
+              aria-label="return to the main page"
               style={{ textDecoration: "none" }}
             >
-              fghgfhgf
-            </Link>
-            <Link
-              to="/"
-              aria-label="logo and return to the main page"
+              Home
+            </HeaderLink>
+            <HeaderLink
+              to="/library"
+              aria-label="return to the library page"
               style={{ textDecoration: "none" }}
             >
-              fghgfhgf
-            </Link>
-          </div>
+              My library
+            </HeaderLink>
+          </BurgerLinkWraper>
 
           <BurgerButtonWraper>
             <BurgerButtonLogAut onClick={handleLogout}>

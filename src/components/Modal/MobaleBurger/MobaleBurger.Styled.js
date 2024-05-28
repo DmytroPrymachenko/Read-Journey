@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 export const BurgerContainer = styled.div`
   background-color: #262626;
@@ -53,4 +54,50 @@ export const BurgerExit = styled.div`
 export const BurgerButtonExit = styled.button`
   border: none;
   background: transparent;
+`;
+
+export const HeaderLink = styled(NavLink)`
+  color: #686868;
+  position: relative;
+  cursor: pointer;
+  transition: color 0.5s ease, transform 0.6s ease;
+
+  &:hover {
+    transform: scale(1.3);
+    color: #fff;
+  }
+
+  &.active {
+    color: #f9f9f9;
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 4px;
+    background-color: #4f92f7;
+    border-radius: 20px;
+    transition: width 0.5s ease-in-out;
+  }
+
+  &.active::before {
+    width: 100%;
+    opacity: 1;
+  }
+
+  &.inactive::before {
+    width: 0;
+    opacity: 0;
+  }
+`;
+
+export const BurgerLinkWraper = styled.div`
+  display: flex;
+  gap: 20px;
+  flex-direction: column;
+  align-items: flex-start;
 `;
