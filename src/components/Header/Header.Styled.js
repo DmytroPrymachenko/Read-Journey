@@ -35,16 +35,3 @@ export const HeaderButtonBurger = styled.button`
     transform: scale(1.1);
   }
 `;
-
-export const RecommendedTitleWraper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 2px;
-`;
-
-export const RecommendedContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-`;

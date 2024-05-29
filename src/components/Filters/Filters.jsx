@@ -22,49 +22,15 @@ import { useDispatch } from "react-redux";
 import { recommendedBooksThunk } from "../../store/books/operations";
 
 import NextSVG from "../../images/NextSVG";
-import { useEffect, useState } from "react";
 
-const Filters = ({ currentPage }) => {
+const Filters = () => {
   const dispatch = useDispatch();
   const { register, handleSubmit } = useForm({
     mode: "onChange",
   });
-  console.log(currentPage);
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
-  useEffect(() => {
-    const handleResize = () => setWindowWidth(window.innerWidth);
-
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
-  const getLimit = () => {
-    if (windowWidth <= 767) return 2;
-    if (windowWidth >= 768 && windowWidth <= 1279) return 8;
-    return 10;
-  };
-  console.log(getLimit());
-
-  // useEffect(() => {
-  //   handleBook();
-  // }, [currentPage]);
-
   const handleBook = ({ title, autor }) => {
-    // const title = register("title").value;
-    // const autor = register("autor").value;
-    // console.log(title, autor);
-
-    dispatch(
-      recommendedBooksThunk({
-        title,
-        autor,
-        page: currentPage,
-        limit: getLimit(),
-      })
-    );
+    dispatch(recommendedBooksThunk({ title, autor }));
   };
-
   return (
     <ContentWraper>
       <FiltersContentWraper>

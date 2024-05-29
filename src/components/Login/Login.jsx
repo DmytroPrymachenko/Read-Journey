@@ -9,19 +9,25 @@ import { useEffect, useState } from "react";
 import { Loader } from "../Loader/Loader";
 import { signInThunk } from "../../store/auth/operations";
 import { selectIsLoading } from "../../store/auth/selectors";
-import { Link, useNavigate } from "react-router-dom";
-// import SvgFavicon from "../../images/favicon/SvgFavicon";
+import { useNavigate } from "react-router-dom";
 import { Container } from "../Layout/Layout.Styled";
-// import { Logo } from "../Logo/Logo";
-// import LogoTitleSvg from "../../images/LogoTitleSvg";
 import {
+  AuthButton,
+  AuthEyeBtn,
   AuthForm,
+  AuthInput,
+  AuthInputContainer,
+  AuthInputTitle,
+  AuthInputWrap,
+  AuthLabel,
+  AuthSlogan,
+  AuthSpan,
+  AuthSubmitBlock,
+  EmtyBlock,
   EnterWrap,
-  InputWrap,
+  LinkStyled,
   LogoTitleSvgWrap,
   LogoWrap,
-  Slogan,
-  SubmitBlock,
 } from "./Login.Styled";
 import Logo from "../../images/Logo";
 import LogoTitleSvg from "../../images/LogoTitleSvg";
@@ -82,41 +88,47 @@ export const Login = () => {
           {/* {window.innerWidth < 768 ? <Logo /> : <LogoTitleSvg />} */}
           <AuthForm onSubmit={handleSubmit(onSubmit)}>
             {/* <div> */}
-            <Slogan>
-              Expand your mind, reading <span> a book</span>
-            </Slogan>
-            {/* <p>
-            Welcome back! Please enter your credentials to access your account
-            and continue your search for a psychologist.
-          </p>
-        </div> */}
-            <InputWrap>
-              <label>
-                <input placeholder="Mail:" type="text" {...register("email")} />
+            <AuthSlogan>
+              Expand your mind, reading <AuthSpan>a book</AuthSpan>
+            </AuthSlogan>
+            <AuthInputWrap>
+              <AuthLabel>
+                <AuthInputContainer>
+                  <AuthInputTitle>Mail:</AuthInputTitle>
+                  <AuthInput
+                    placeholder="Mail:"
+                    type="text"
+                    {...register("email")}
+                  />
+                </AuthInputContainer>
                 <span>{errors.email?.message}</span>
-              </label>
-              <label>
-                <input
-                  placeholder="Password:"
-                  type={eye ? "text" : "password"}
-                  {...register("password")}
-                />
+              </AuthLabel>
+              <AuthLabel>
+                <AuthInputContainer>
+                  <AuthInputTitle>Password:</AuthInputTitle>
+                  <AuthInput
+                    placeholder="Password:"
+                    type={eye ? "text" : "password"}
+                    {...register("password")}
+                  />
+                </AuthInputContainer>
                 <span>{errors.password?.message}</span>
-                <button
+                <AuthEyeBtn
                   type="button"
                   onClick={() => setEye(!eye)}
                   aria-label="show or hide password"
                 >
                   {eye ? <EyeOpenSvg /> : <EyeCloseSvg />}
-                </button>
-              </label>
-            </InputWrap>
-            <SubmitBlock>
-              <button name="submit" type="submit" aria-label="Log In">
-                Log In
-              </button>
-              <Link to={"/register"}>Don’t have an account?</Link>
-            </SubmitBlock>
+                </AuthEyeBtn>
+              </AuthLabel>
+              <EmtyBlock></EmtyBlock>
+            </AuthInputWrap>
+            <AuthSubmitBlock>
+              <AuthButton name="submit" type="submit" aria-label="Log In">
+                Log in
+              </AuthButton>
+              <LinkStyled to={"/register"}>Don’t have an account?</LinkStyled>
+            </AuthSubmitBlock>
           </AuthForm>
         </EnterWrap>
       </Container>
