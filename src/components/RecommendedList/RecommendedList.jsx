@@ -1,31 +1,44 @@
 import { useSelector } from "react-redux";
-import { selectRecommendedBooks } from "../../store/books/selectors";
+import {
+  selectRecommendedBooks,
+  selectTotalBooks,
+} from "../../store/books/selectors";
 import { ContentWraper } from "../Filters/Filters.Styled";
+import RecommendedItem from "../RecommendedItem/RecommendedItem";
+import { nanoid } from "nanoid";
+import {
+  NextButton,
+  PrevButton,
+  RecommendedListUl,
+} from "./RecommendedList.Styled";
 
-const RecommendedList = () => {
+const RecommendedList = ({
+  handlePrevPage,
+  handleNextPage,
+  isFirstPage,
+  isLastPage,
+}) => {
   const booksList = useSelector(selectRecommendedBooks);
-  console.log(booksList);
+
   return (
     <ContentWraper>
       <div>
         <h1>Recommended</h1>
         <div>
-          <button>Попередня</button>
-          <button>Наступна</button>
+          <PrevButton onClick={handlePrevPage}>
+            {isFirstPage ? "Початкова" : "Попередня"}
+          </PrevButton>
+          <NextButton onClick={handleNextPage}>
+            {isLastPage ? "Остання" : "Наступна"}
+          </NextButton>
         </div>
-        <div>
-          <ul>
+        <>
+          <RecommendedListUl>
             {booksList.map((book) => (
-              <li key={book._id}>
-                <img src={book.imageUrl} alt={book.title} />
-                <div>
-                  <span>{book.title}</span>
-                  <span>{book.author}</span>
-                </div>
-              </li>
+              <RecommendedItem book={book} key={nanoid()} />
             ))}
-          </ul>
-        </div>
+          </RecommendedListUl>
+        </>
       </div>
     </ContentWraper>
   );

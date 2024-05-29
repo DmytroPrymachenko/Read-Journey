@@ -27,6 +27,7 @@ const authSlice = createSlice({
         state.refreshToken = payload.refreshToken;
         state.isLoading = false;
       })
+
       .addCase(signUpThunk.rejected, (state, { payload }) => {
         state.error = payload;
         state.isLoading = false;
