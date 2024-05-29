@@ -1,20 +1,13 @@
 import { Suspense, useEffect, useState } from "react";
-
 import { Route, Routes, useLocation } from "react-router-dom";
 import Layout from "./components/Layout/Layout";
-// import IsLoading from "../IsLoading/IsLoading";
 import Home from "./pages/Home/Home";
-
 import Library from "./pages/Library/Library";
 import ErrorPage from "./pages/ErrorPage/ErrorPage";
 import Reading from "./pages/Reading/Reading";
-// import Register from "../../pages/Authorization/Register/Register";
-// import Login from "../../pages/Authorization/Login/Login";
-
 import { Loader } from "./components/Loader/Loader";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import LoginPage from "./pages/LoginPage/LoginPage";
-
 import { currentThunk } from "./store/auth/operations";
 import { useDispatch, useSelector } from "react-redux";
 import { selectUser } from "./store/auth/selectors";
@@ -54,9 +47,30 @@ function App() {
                 </PrivateRoute>
               }
             />
-            <Route path="/recommended" element={<RecommendedPage />} />
-            <Route path="/library" element={<Library />} />
-            <Route path="/reading" element={<Reading />} />
+            <Route
+              path="/recommended"
+              element={
+                <PrivateRoute>
+                  <RecommendedPage />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/library"
+              element={
+                <PrivateRoute>
+                  <Library />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/reading"
+              element={
+                <PrivateRoute>
+                  <Reading />
+                </PrivateRoute>
+              }
+            />
           </Route>
 
           <>
