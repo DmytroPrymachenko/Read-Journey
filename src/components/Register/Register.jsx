@@ -6,12 +6,32 @@ import EyeCloseSvg from "../../images/authIcons/EyeCloseSvg";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { useState } from "react";
-import { signUpThunk } from "../../store/auth/operations";
+import { signInThunk, signUpThunk } from "../../store/auth/operations";
 import { selectIsLoading } from "../../store/auth/selectors";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Loader } from "../../components/Loader/Loader";
-import SvgFavicon from "../../images/favicon/SvgFavicon";
 import { Container } from "../Layout/Layout.Styled";
+import {
+  AuthEyeBtn,
+  AuthForm,
+  AuthInput,
+  AuthInputContainer,
+  AuthInputTitle,
+  AuthInputWrap,
+  AuthLabel,
+  AuthSlogan,
+  AuthSpan,
+  AuthSubmitBlock,
+  EnterWrap,
+  ErrorSpan,
+  ErrorSvgStyled,
+  LinkStyled,
+  LogoLink,
+  LogoStyled,
+  LogoTitleSvgStyled,
+  OkSvgStyled,
+} from "../Login/Login.Styled";
+import { AuthButton } from "./Register.Styled";
 
 const schema = yup.object({
   name: yup.string().required("The name is required"),
@@ -46,7 +66,13 @@ export const Register = () => {
       .unwrap()
       .then(() => {
         toast.success("Sign up done!");
-        navigate("/recommended");
+        dispatch(signInThunk({ email, password }))
+          .unwrap()
+          .then(() => {
+            toast.success(`Welcome`);
+            navigate("/recommended");
+          })
+          .catch((err) => toast.error(err));
       })
       .catch(() => toast.error("Ooops... Something went wrong!"));
   }
@@ -55,50 +81,72 @@ export const Register = () => {
     <>
       {isLoading && <Loader />}
       <Container>
-        <div>
-          <SvgFavicon />
-          <p>read journey</p>
-        </div>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div>
-            <h1>Registration</h1>
-            <p>
-              Thank you for your interest in our platform! In order to register,
-              we need some information. Please provide us with the following
-              information.
-            </p>
-          </div>
-          <div>
-            <label>
-              <input placeholder="Name" type="text" {...register("name")} />
-              <span>{errors.name?.message}</span>
-            </label>
-            <label>
-              <input placeholder="Email" type="text" {...register("email")} />
-              <span>{errors.email?.message}</span>
-            </label>
-            <label>
-              <input
-                placeholder="Password"
-                type={eye ? "text" : "password"}
-                {...register("password")}
-              />
-              <span>{errors.password?.message}</span>
-              <button
-                type="button"
-                onClick={() => setEye(!eye)}
-                aria-label="show or hide password"
-              >
-                {eye ? <EyeOpenSvg /> : <EyeCloseSvg />}
-              </button>
-            </label>
-          </div>
-
-          <button name="submit" type="submit" aria-label="Sign Up">
-            Registration
-          </button>
-          <Link to={"/login"}>Already have an account?</Link>
-        </form>
+        <EnterWrap>
+          <LogoLink to={"/register"}>
+            <LogoStyled />
+            <LogoTitleSvgStyled />
+          </LogoLink>
+          <AuthForm onSubmit={handleSubmit(onSubmit)}>
+            <AuthSlogan>
+              Expand your mind, reading <AuthSpan>a book</AuthSpan>
+            </AuthSlogan>
+            <AuthInputWrap>
+              <AuthLabel>
+                <AuthInputContainer $err={errors.name}>
+                  <AuthInputTitle>Name:</AuthInputTitle>
+                  <AuthInput
+                    placeholder="Name:"
+                    type="text"
+                    {...register("name")}
+                  />
+                  <ErrorSvgStyled $err={errors.name} />
+                  <OkSvgStyled $err={errors.name} />
+                </AuthInputContainer>
+                <ErrorSpan>{errors.name?.message}</ErrorSpan>
+              </AuthLabel>
+              <AuthLabel>
+                <AuthInputContainer $err={errors.email}>
+                  <AuthInputTitle>Mail:</AuthInputTitle>
+                  <AuthInput
+                    placeholder="Mail:"
+                    type="text"
+                    {...register("email")}
+                  />
+                  <ErrorSvgStyled $err={errors.email} />
+                  <OkSvgStyled $err={errors.email} />
+                </AuthInputContainer>
+                <ErrorSpan>{errors.email?.message}</ErrorSpan>
+              </AuthLabel>
+              <AuthLabel>
+                <AuthInputContainer $err={errors.password}>
+                  <AuthInputTitle>Password:</AuthInputTitle>
+                  <AuthInput
+                    placeholder="Password:"
+                    type={eye ? "text" : "password"}
+                    {...register("password")}
+                  />
+                  <ErrorSvgStyled $err={errors.password} />
+                  <OkSvgStyled $err={errors.password} />
+                </AuthInputContainer>
+                <ErrorSpan>{errors.password?.message}</ErrorSpan>
+                <AuthEyeBtn
+                  $err={errors.password}
+                  type="button"
+                  onClick={() => setEye(!eye)}
+                  aria-label="show or hide password"
+                >
+                  {eye ? <EyeOpenSvg /> : <EyeCloseSvg />}
+                </AuthEyeBtn>
+              </AuthLabel>
+            </AuthInputWrap>
+            <AuthSubmitBlock>
+              <AuthButton name="submit" type="submit" aria-label="Log In">
+                Registration
+              </AuthButton>
+              <LinkStyled to={"/login"}>Already have an account?</LinkStyled>
+            </AuthSubmitBlock>
+          </AuthForm>
+        </EnterWrap>
       </Container>
     </>
   );
