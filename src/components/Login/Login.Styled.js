@@ -1,5 +1,9 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import Logo from "../../images/Logo";
+import LogoTitleSvg from "../../images/LogoTitleSvg";
+import ErrorSvg from "../../images/authIcons/ErrorSvg";
+import OkSvg from "../../images/authIcons/OkSvg";
 
 export const EnterWrap = styled.div`
   display: flex;
@@ -7,32 +11,42 @@ export const EnterWrap = styled.div`
   padding: 20px 20px 40px;
   gap: 40px;
   border-radius: 30px;
-  background-color: #1f1f1f;
+  background-color: var(--dark-grey);
   @media only screen and (min-width: 768px) {
+    padding: 40px 64px 214px;
+    gap: 157px;
+  }
+  @media only screen and (min-width: 1280px) {
+    width: 600px;
     padding: 40px 64px;
+    gap: 107px;
   }
 `;
-export const LogoWrap = styled.div`
+export const LogoStyled = styled(Logo)`
   height: 17px;
   @media only screen and (min-width: 768px) {
     display: none;
   }
 `;
-export const LogoTitleSvgWrap = styled.div`
+export const LogoTitleSvgStyled = styled(LogoTitleSvg)`
+  height: 17px;
   @media only screen and (max-width: 767px) {
     display: none;
   }
 `;
 export const AuthSlogan = styled.h1`
-  font: 700 32px / 1 "Gilroy", sans-serif;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 1;
   letter-spacing: 0.02em;
-  color: #f9f9f9;
+  color: var(--white);
+  max-width: 444px;
   @media only screen and (min-width: 768px) {
+    font-size: 64px;
+    line-height: 0.9375;
   }
 `;
 export const AuthSpan = styled.span`
-  font: 700 32px / 1 "Gilroy", sans-serif;
-  letter-spacing: 0.02em;
   color: rgba(227, 227, 227, 0.5);
   @media only screen and (min-width: 768px) {
   }
@@ -43,13 +57,16 @@ export const AuthForm = styled.form`
   flex-direction: column;
   gap: 20px;
   @media only screen and (min-width: 768px) {
+    gap: 40px;
   }
 `;
 export const AuthInputWrap = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
+  max-width: 472px;
   @media only screen and (min-width: 768px) {
+    gap: 14px;
   }
 `;
 export const AuthSubmitBlock = styled.div`
@@ -57,11 +74,13 @@ export const AuthSubmitBlock = styled.div`
   gap: 14px;
   align-items: center;
   @media only screen and (min-width: 768px) {
+    gap: 20px;
   }
 `;
 export const EmtyBlock = styled.div`
   height: 44px;
   @media only screen and (min-width: 768px) {
+    height: 92px;
   }
 `;
 export const AuthLabel = styled.label`
@@ -78,44 +97,80 @@ export const AuthInputContainer = styled.div`
   /* border: 1px solid red; */
   border-radius: 12px;
   align-items: center;
-  background: #262626;
+  background: var(--input-bg);
+  /* border: 1px solid transparent; */
+  margin-bottom: ${(props) => (props.$err ? "4px" : "")};
+  &:focus-within {
+    border: 1px solid ${(props) => (props.$err ? "#e90516" : "#30b94d")};
+  }
+  @media only screen and (min-width: 768px) {
+  }
+`;
+export const ErrorSvgStyled = styled(ErrorSvg)`
+  display: ${(props) => (props.$err ? "block" : "none")};
+  position: absolute;
+  right: 16px;
+  top: 13px;
+  z-index: 3;
+  @media only screen and (min-width: 768px) {
+  }
+`;
+export const OkSvgStyled = styled(OkSvg)`
+  /* display: ${(props) => (!props.$err ? "block" : "none")}; */
+  display: none;
+  position: absolute;
+  right: 16px;
+  top: 13px;
   @media only screen and (min-width: 768px) {
   }
 `;
 export const AuthInputTitle = styled.p`
   padding: 14px 0 14px 14px;
-  /* border-radius: 12px 0 0 12px; */
-  color: #686868;
-  background: #262626;
-  font: 500 12px / 1.33333 "Gilroy", sans-serif;
+  border-radius: 12px 0 0 12px;
+  color: var(--input-title);
+  background: var(--input-bg);
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.33333;
   letter-spacing: -0.02em;
   text-align: center;
   @media only screen and (min-width: 768px) {
-    padding: 16px 16px 16px 0;
+    padding: 16px 0 16px 14px;
+    font-size: 14px;
+    line-height: 1.28571;
   }
 `;
 export const AuthInput = styled.input`
   padding: 14px 14px 14px 0;
-  /* border-radius: 0 12px 12px 0; */
-  background: #262626;
-  color: #f9f9f9;
+  border-radius: 0 12px 12px 0;
+  background: var(--input-bg);
+  color: var(--white);
   width: 100%;
   outline: none;
   border: none;
-  font: 500 12px / 1.33333 "Gilroy", sans-serif;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.33333;
   letter-spacing: -0.02em;
   &::placeholder {
-    background: #262626;
-    color: #f9f9f9;
+    background: var(--input-bg);
+    color: var(--white);
   }
-  /* &:focus, */
   &:active {
-    background: #262626;
-    color: #f9f9f9;
+    background: var(--input-bg);
+    color: var(--white);
   }
   @media only screen and (min-width: 768px) {
     padding: 16px 16px 16px 0;
+    font-size: 14px;
+    line-height: 1.28571;
   }
+`;
+export const ErrorSpan = styled.span`
+  color: #e90516;
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 1.2;
 `;
 export const AuthEyeBtn = styled.button`
   position: absolute;
@@ -127,28 +182,51 @@ export const AuthEyeBtn = styled.button`
   height: 20px;
   width: 20px;
   z-index: 2;
+  display: ${(props) => (props.$err ? "none" : "block")};
+  @media only screen and (min-width: 768px) {
+    right: 18px;
+    top: 15px;
+  }
 `;
 export const AuthButton = styled.button`
-  /* margin-top: 22px; */
   border-radius: 30px;
   padding: 12px 15px;
   border: none;
-  background-color: #f9f9f9;
+  background-color: var(--white);
   transition: all 0.3s;
   width: 131px;
-  /* white-space: nowrap; */
-  font: 700 14px / 1.28571 "Gilroy", sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.28571;
   letter-spacing: 0.02em;
-  color: #1f1f1f;
-  &:hover {
-    background-color: var(--hover-green);
+  color: var(--dark-grey);
+  &:hover,
+  &:active {
+    border: 1px solid rgba(249, 249, 249, 0.2);
+    background-color: var(--dark-grey);
+    color: var(--white);
+  }
+  @media only screen and (min-width: 768px) {
+    padding: 16px 45px;
+    width: 166px;
+    font-size: 20px;
+    line-height: 1;
   }
 `;
 export const LinkStyled = styled(Link)`
-  font: 500 12px / 1.16667 "Gilroy", sans-serif;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.16667;
   letter-spacing: -0.02em;
   text-decoration: underline;
   text-decoration-skip-ink: none;
   text-align: center;
-  color: #686868;
+  color: var(--input-title);
+  &:hover {
+    color: var(--white);
+  }
+  @media only screen and (min-width: 768px) {
+    font-size: 14px;
+    line-height: 1.28571;
+  }
 `;

@@ -1,8 +1,8 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
-import EyeOpenSvg from "../../images/EyeOpenSvg";
-import EyeCloseSvg from "../../images/EyeCloseSvg";
+import EyeOpenSvg from "../../images/authIcons/EyeOpenSvg";
+import EyeCloseSvg from "../../images/authIcons/EyeCloseSvg";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { useState } from "react";
