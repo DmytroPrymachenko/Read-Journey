@@ -102,6 +102,12 @@ export const AuthInputContainer = styled.div`
   margin-bottom: ${(props) => (props.$err ? "4px" : "")};
   &:focus-within {
     border: 1px solid ${(props) => (props.$err ? "#e90516" : "#30b94d")};
+    svg:last-child {
+      display: ${(props) => (props.$err ? "none" : "block")};
+    }
+  }
+  &:focus-within ~ button {
+    display: none;
   }
   @media only screen and (min-width: 768px) {
   }
@@ -113,15 +119,19 @@ export const ErrorSvgStyled = styled(ErrorSvg)`
   top: 13px;
   z-index: 3;
   @media only screen and (min-width: 768px) {
+    right: 18px;
+    top: 15px;
   }
 `;
 export const OkSvgStyled = styled(OkSvg)`
-  /* display: ${(props) => (!props.$err ? "block" : "none")}; */
   display: none;
   position: absolute;
   right: 16px;
   top: 13px;
+  z-index: 3;
   @media only screen and (min-width: 768px) {
+    right: 18px;
+    top: 15px;
   }
 `;
 export const AuthInputTitle = styled.p`
@@ -182,7 +192,7 @@ export const AuthEyeBtn = styled.button`
   height: 20px;
   width: 20px;
   z-index: 2;
-  display: ${(props) => (props.$err ? "none" : "block")};
+  /* display: ${(props) => (props.$err ? "none" : "block")}; */
   @media only screen and (min-width: 768px) {
     right: 18px;
     top: 15px;
