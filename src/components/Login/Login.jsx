@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import { Loader } from "../Loader/Loader";
 import { signInThunk } from "../../store/auth/operations";
 import { selectIsLoading } from "../../store/auth/selectors";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Container } from "../Layout/Layout.Styled";
 import {
   AuthButton,
@@ -28,16 +28,11 @@ import {
   ErrorSpan,
   ErrorSvgStyled,
   LinkStyled,
+  LogoLink,
   LogoStyled,
   LogoTitleSvgStyled,
   OkSvgStyled,
-  // LogoTitleSvgWrap,
-  // LogoWrap,
 } from "./Login.Styled";
-// import ErrorSvg from "../../images/authIcons/ErrorSvg";
-// import OkSvg from "../../images/authIcons/OkSvg";
-// import Logo from "../../images/Logo";
-// import LogoTitleSvg from "../../images/LogoTitleSvg";
 
 const schema = yup.object({
   email: yup
@@ -86,10 +81,10 @@ export const Login = () => {
       {isLoading && <Loader />}
       <Container>
         <EnterWrap>
-          <Link to={"/register"}>
+          <LogoLink to={"/register"}>
             <LogoStyled />
             <LogoTitleSvgStyled />
-          </Link>
+          </LogoLink>
           <AuthForm onSubmit={handleSubmit(onSubmit)}>
             <AuthSlogan>
               Expand your mind, reading <AuthSpan>a book</AuthSpan>
