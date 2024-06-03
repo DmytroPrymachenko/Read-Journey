@@ -1,32 +1,70 @@
+import { useEffect, useState } from "react";
 import Filters from "../../components/Filters/Filters";
 import RecommendedList from "../../components/RecommendedList/RecommendedList";
+import { useDispatch } from "react-redux";
+import { recommendedBooksThunk } from "../../store/books/operations";
 
 const RecommendedPage = () => {
-  // const [currentPage, setCurrentPage] = useState(1);
-  // const totalBooks = useSelector(selectTotalBooks);
-  // const handlePrevPage = () => {
-  //   if (currentPage > 1) {
-  //     setCurrentPage(currentPage - 1);
-  //   }
-  // };
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [changes, setChanges] = useState(false);
+  console.log(changes);
+  // тест
 
-  // const handleNextPage = () => {
-  //   if (currentPage < totalBooks) {
-  //     setCurrentPage(currentPage + 1);
-  //   }
-  // };
+  // тест
 
-  // const isFirstPage = currentPage === 1;
+  const dispatch = useDispatch();
 
-  // const isLastPage = currentPage === totalBooks;
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const getLimit = () => {
+    if (windowWidth <= 767) return 2;
+    if (windowWidth >= 768 && windowWidth <= 1279) return 8;
+    return 10;
+  };
+  console.log(getLimit());
+
+  useEffect(() => {
+    const recommendedData = JSON.parse(localStorage.getItem("recommended"));
+
+    const limit = getLimit();
+
+    const updatedData = {
+      ...recommendedData,
+      limit,
+    };
+
+    localStorage.setItem("recommended", JSON.stringify(updatedData));
+    if (limit !== recommendedData.limit) {
+      setChanges(!changes);
+    }
+  });
+
+  useEffect(() => {
+    const recommendedData = JSON.parse(localStorage.getItem("recommended"));
+    if (recommendedData) {
+      dispatch(
+        recommendedBooksThunk({
+          title: recommendedData.title,
+          author: recommendedData.author,
+          page: recommendedData.page,
+          limit: recommendedData.limit,
+        })
+      );
+    }
+  }, [dispatch, changes]);
 
   return (
     <>
       <>
-        <Filters />
+        <Filters setChanges={setChanges} changes={changes} />
       </>
       <>
-        <RecommendedList />
+        <RecommendedList setChanges={setChanges} changes={changes} />
       </>
     </>
   );

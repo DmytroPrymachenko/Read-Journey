@@ -18,38 +18,38 @@ import {
   WorkoutNamredWraper,
 } from "./Filters.Styled";
 
-import { useDispatch } from "react-redux";
-import { recommendedBooksThunk } from "../../store/books/operations";
-
 import NextSVG from "../../images/NextSVG";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
-const Filters = () => {
-  const dispatch = useDispatch();
-  const { register, handleSubmit } = useForm({
+const Filters = ({ setChanges, changes }) => {
+  // const dispatch = useDispatch();
+  const { register, handleSubmit, setValue } = useForm({
     mode: "onChange",
   });
-  // console.log(currentPage);
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   useEffect(() => {
-    const handleResize = () => setWindowWidth(window.innerWidth);
+    const recommendedData = JSON.parse(localStorage.getItem("recommended"));
+    if (recommendedData && recommendedData.title) {
+      setValue("title", recommendedData.title);
+    }
+    if (recommendedData && recommendedData.author) {
+      setValue("author", recommendedData.author);
+    }
+  }, [setValue]);
 
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  const handleBook = ({ title, author }) => {
+    const recommendedData = JSON.parse(localStorage.getItem("recommended"));
+    const updatedData = {
+      ...recommendedData,
+      title,
+      author,
+    };
 
-  const getLimit = () => {
-    if (windowWidth <= 767) return 2;
-    if (windowWidth >= 768 && windowWidth <= 1279) return 8;
-    return 10;
-  };
-  console.log(getLimit());
+    localStorage.setItem("recommended", JSON.stringify(updatedData));
 
-  // useEffect(() => {}, [currentPage]);
-
-  const handleBook = ({ title, autor }) => {
-    dispatch(recommendedBooksThunk({ title, autor }));
+    if (title !== recommendedData.title || author !== recommendedData.author) {
+      setChanges(!changes);
+    }
   };
   return (
     <ContentWraper>
@@ -68,7 +68,7 @@ const Filters = () => {
             </FiltersInputWraper>
             <FiltersInputWraper>
               <FiltersInput
-                {...register("autor")}
+                {...register("author")}
                 type="text"
                 id="autor"
                 placeholder="Enter text"
