@@ -22,14 +22,14 @@ import { useDispatch } from "react-redux";
 import { recommendedBooksThunk } from "../../store/books/operations";
 
 import NextSVG from "../../images/NextSVG";
+import { useEffect, useState } from "react";
 
 const Filters = () => {
   const dispatch = useDispatch();
   const { register, handleSubmit } = useForm({
     mode: "onChange",
   });
-<<<<<<< HEAD
-  console.log(currentPage);
+  // console.log(currentPage);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   useEffect(() => {
@@ -46,10 +46,8 @@ const Filters = () => {
   };
   console.log(getLimit());
 
-  useEffect(() => {}, [currentPage]);
+  // useEffect(() => {}, [currentPage]);
 
-=======
->>>>>>> 841c40ed19c8a66d14ea9100230b06a00aaba8be
   const handleBook = ({ title, autor }) => {
     dispatch(recommendedBooksThunk({ title, autor }));
   };
