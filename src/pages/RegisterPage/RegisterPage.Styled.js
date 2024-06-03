@@ -1,11 +1,12 @@
 import styled from "styled-components";
+import { Container } from "../../components/Layout/Layout.Styled";
 
-export const Container = styled.div`
-  padding: 20px;
-  margin: 0 auto;
-  border-radius: 30px;
-  min-width: 320px;
-  max-width: 375px;
-  /* height: 411px; */
-  background: var(--black);
+export const AuthContainer = styled(Container)`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  @media only screen and (min-width: 1280px) {
+    flex-direction: row;
+    gap: 16px;
+  }
 `;
