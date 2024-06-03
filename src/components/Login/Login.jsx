@@ -1,30 +1,38 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
-import EyeOpenSvg from "../../images/EyeOpenSvg";
-import EyeCloseSvg from "../../images/EyeCloseSvg";
+import EyeOpenSvg from "../../images/authIcons/EyeOpenSvg";
+import EyeCloseSvg from "../../images/authIcons/EyeCloseSvg";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
 import { Loader } from "../Loader/Loader";
 import { signInThunk } from "../../store/auth/operations";
 import { selectIsLoading } from "../../store/auth/selectors";
-import { Link, useNavigate } from "react-router-dom";
-// import SvgFavicon from "../../images/favicon/SvgFavicon";
+import { useNavigate } from "react-router-dom";
 import { Container } from "../Layout/Layout.Styled";
-// import { Logo } from "../Logo/Logo";
-// import LogoTitleSvg from "../../images/LogoTitleSvg";
 import {
+  AuthButton,
+  AuthEyeBtn,
   AuthForm,
+  AuthInput,
+  AuthInputContainer,
+  AuthInputTitle,
+  AuthInputWrap,
+  AuthLabel,
+  AuthSlogan,
+  AuthSpan,
+  AuthSubmitBlock,
+  EmtyBlock,
   EnterWrap,
-  InputWrap,
-  LogoTitleSvgWrap,
-  LogoWrap,
-  Slogan,
-  SubmitBlock,
+  ErrorSpan,
+  ErrorSvgStyled,
+  LinkStyled,
+  LogoLink,
+  LogoStyled,
+  LogoTitleSvgStyled,
+  OkSvgStyled,
 } from "./Login.Styled";
-import Logo from "../../images/Logo";
-import LogoTitleSvg from "../../images/LogoTitleSvg";
 
 const schema = yup.object({
   email: yup
@@ -73,50 +81,59 @@ export const Login = () => {
       {isLoading && <Loader />}
       <Container>
         <EnterWrap>
-          <LogoWrap>
-            <Logo />
-          </LogoWrap>
-          <LogoTitleSvgWrap>
-            <LogoTitleSvg />
-          </LogoTitleSvgWrap>
-          {/* {window.innerWidth < 768 ? <Logo /> : <LogoTitleSvg />} */}
+          <LogoLink to={"/register"}>
+            <LogoStyled />
+            <LogoTitleSvgStyled />
+          </LogoLink>
           <AuthForm onSubmit={handleSubmit(onSubmit)}>
-            {/* <div> */}
-            <Slogan>
-              Expand your mind, reading <span> a book</span>
-            </Slogan>
-            {/* <p>
-            Welcome back! Please enter your credentials to access your account
-            and continue your search for a psychologist.
-          </p>
-        </div> */}
-            <InputWrap>
-              <label>
-                <input placeholder="Mail:" type="text" {...register("email")} />
-                <span>{errors.email?.message}</span>
-              </label>
-              <label>
-                <input
-                  placeholder="Password:"
-                  type={eye ? "text" : "password"}
-                  {...register("password")}
-                />
-                <span>{errors.password?.message}</span>
-                <button
+            <AuthSlogan>
+              Expand your mind, reading <AuthSpan>a book</AuthSpan>
+            </AuthSlogan>
+            <AuthInputWrap>
+              <AuthLabel>
+                <AuthInputContainer $err={errors.email}>
+                  <AuthInputTitle>Mail:</AuthInputTitle>
+                  <AuthInput
+                    placeholder="Mail:"
+                    type="text"
+                    {...register("email")}
+                    id="email"
+                    $value={register.value}
+                  />
+                  <ErrorSvgStyled $err={errors.email} />
+                  <OkSvgStyled $err={errors.email} />
+                </AuthInputContainer>
+                <ErrorSpan>{errors.email?.message}</ErrorSpan>
+              </AuthLabel>
+              <AuthLabel>
+                <AuthInputContainer $err={errors.password}>
+                  <AuthInputTitle>Password:</AuthInputTitle>
+                  <AuthInput
+                    placeholder="Password:"
+                    type={eye ? "text" : "password"}
+                    {...register("password")}
+                  />
+                  <ErrorSvgStyled $err={errors.password} />
+                  <OkSvgStyled $err={errors.password} />
+                </AuthInputContainer>
+                <ErrorSpan>{errors.password?.message}</ErrorSpan>
+                <AuthEyeBtn
+                  $err={errors.password}
                   type="button"
                   onClick={() => setEye(!eye)}
                   aria-label="show or hide password"
                 >
                   {eye ? <EyeOpenSvg /> : <EyeCloseSvg />}
-                </button>
-              </label>
-            </InputWrap>
-            <SubmitBlock>
-              <button name="submit" type="submit" aria-label="Log In">
-                Log In
-              </button>
-              <Link to={"/register"}>Don’t have an account?</Link>
-            </SubmitBlock>
+                </AuthEyeBtn>
+              </AuthLabel>
+              <EmtyBlock></EmtyBlock>
+            </AuthInputWrap>
+            <AuthSubmitBlock>
+              <AuthButton name="submit" type="submit" aria-label="Log In">
+                Log in
+              </AuthButton>
+              <LinkStyled to={"/register"}>Don’t have an account?</LinkStyled>
+            </AuthSubmitBlock>
           </AuthForm>
         </EnterWrap>
       </Container>
