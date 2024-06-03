@@ -46,9 +46,7 @@ const Filters = ({ currentPage }) => {
   };
   console.log(getLimit());
 
-  // useEffect(() => {
-  //   handleBook();
-  // }, [currentPage]);
+  useEffect(() => {}, [currentPage]);
 
   const handleBook = ({ title, autor }) => {
     // const title = register("title").value;

@@ -18,7 +18,7 @@ const RecommendedPage = () => {
       setCurrentPage(currentPage + 1);
     }
   };
-  console.log("Test", currentPage);
+
   const isFirstPage = currentPage === 1;
 
   const isLastPage = currentPage === totalBooks;
