@@ -17,7 +17,7 @@ export const EnterWrap = styled.div`
     gap: 157px;
   }
   @media only screen and (min-width: 1280px) {
-    width: 600px;
+    width: 50%;
     padding: 40px 64px;
     gap: 107px;
   }
