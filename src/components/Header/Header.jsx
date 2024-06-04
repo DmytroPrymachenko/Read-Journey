@@ -27,7 +27,7 @@ const Header = () => {
     dispatch(logoutThunk())
       .then(() => {
         toast.success("Successfully logged out.");
-        navigate("/register");
+        navigate("/login");
       })
       .catch((error) => {
         toast.error(error);

@@ -2,6 +2,7 @@ import { useSelector } from "react-redux";
 import { selectUser } from "../store/auth/selectors";
 import { Navigate } from "react-router-dom";
 import { useEffect, useRef } from "react";
+
 const PublicRoute = ({ children, location }) => {
   const user = useSelector(selectUser);
 
