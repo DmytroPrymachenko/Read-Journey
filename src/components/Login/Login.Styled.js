@@ -198,6 +198,7 @@ export const AuthEyeBtn = styled.button`
   height: 20px;
   width: 20px;
   z-index: 2;
+  display: ${(props) => (props.$err ? "none" : "block")};
   @media only screen and (min-width: 768px) {
     right: 18px;
     top: 15px;

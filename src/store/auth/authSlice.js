@@ -52,7 +52,6 @@ const authSlice = createSlice({
       })
       .addCase(currentThunk.fulfilled, (state, { payload }) => {
         state.user = payload;
-        state.expireTime = Date.now() + 60 * 60 * 1000;
         state.isLoading = false;
       })
       .addCase(currentThunk.rejected, (state, { payload }) => {
@@ -78,6 +77,7 @@ const authSlice = createSlice({
       .addCase(refreshTokensThunk.fulfilled, (state, { payload }) => {
         state.token = payload.token;
         state.refreshToken = payload.refreshToken;
+        state.expireTime = Date.now() + 60 * 60 * 1000;
         state.isLoading = false;
       })
       .addCase(refreshTokensThunk.rejected, (state, { payload }) => {
