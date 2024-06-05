@@ -13,6 +13,7 @@ import storage from "redux-persist/lib/storage";
 import { authReducer } from "./auth/authSlice";
 import { booksReducer } from "./books/booksSlise";
 import { recommendReducer } from "./recommend/recommendSlise";
+import { userBooksReducer } from "./books/userBooksSlise";
 
 const persistConfig = {
   key: "auth",
@@ -37,6 +38,7 @@ export const store = configureStore({
     auth: persistedReducer,
     books: booksReducer,
     recommend: recommendPersistedReducer,
+    userBooks: userBooksReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

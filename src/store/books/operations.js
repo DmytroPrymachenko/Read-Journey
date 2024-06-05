@@ -17,3 +17,44 @@ export const recommendedBooksThunk = createAsyncThunk(
     }
   }
 );
+
+export const addBookFromRecommendations = createAsyncThunk(
+  "books/add/idBook",
+  async (id, thunkAPI) => {
+    try {
+      const { data } = await api.post(`/books/add/${id}`);
+
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const fetchUserBooks = createAsyncThunk(
+  "books/UserBooks",
+  async ({ status } = {}, thunkAPI) => {
+    try {
+      const config = status ? { params: { status } } : {};
+      const { data } = await api.get("/books/own", config);
+      console.log("data", data);
+      return data;
+    } catch (error) {
+      console.log("error", error);
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+);
+// export const fetchUserBooks = createAsyncThunk(
+//   "books/UserBooks",
+//   async ({ status }, thunkAPI) => {
+//     try {
+//       const { data } = await api.get("/books/own", { params: { status } });
+//       console.log("data", data);
+//       return data;
+//     } catch (error) {
+//       console.log("error", error);
+//       return thunkAPI.rejectWithValue(error.response.data);
+//     }
+//   }
+// );
