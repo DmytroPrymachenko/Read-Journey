@@ -18,7 +18,7 @@ const persistConfig = {
   key: "auth",
   version: 1,
   storage,
-  whitelist: ["token", "refreshToken"],
+  whitelist: ["token", "refreshToken", "expireTime"],
 };
 
 const recommendPersistConfig = {

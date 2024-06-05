@@ -1,10 +1,13 @@
+import { AuthImage } from "../../components/AuthImage/AuthImage";
 import { Register } from "../../components/Register/Register";
+import { AuthContainer } from "./RegisterPage.Styled";
 
 const RegisterPage = () => {
   return (
-    <div>
+    <AuthContainer>
       <Register />
-    </div>
+      <AuthImage />
+    </AuthContainer>
   );
 };
 
