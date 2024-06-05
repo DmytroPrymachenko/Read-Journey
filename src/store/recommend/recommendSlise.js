@@ -17,9 +17,9 @@ const recommendSlice = createSlice({
       state.author = author;
       state.page = page;
       state.limit = limit;
-      localStorage.setItem("recommended", JSON.stringify(state));
     },
   },
 });
 
+export const { setRecommendData } = recommendSlice.actions;
 export const recommendReducer = recommendSlice.reducer;

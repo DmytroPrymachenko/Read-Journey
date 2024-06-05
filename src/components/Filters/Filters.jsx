@@ -20,36 +20,29 @@ import {
 
 import NextSVG from "../../images/NextSVG";
 import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { selectRecommended } from "../../store/books/selectors";
+import { setRecommendData } from "../../store/recommend/recommendSlise";
 
-const Filters = ({ setChanges, changes }) => {
-  // const dispatch = useDispatch();
+const Filters = () => {
+  const dispatch = useDispatch();
   const { register, handleSubmit, setValue } = useForm({
     mode: "onChange",
   });
+  const recommendedBooks = useSelector(selectRecommended);
+  console.log(recommendedBooks);
 
   useEffect(() => {
-    const recommendedData = JSON.parse(localStorage.getItem("recommended"));
-    if (recommendedData && recommendedData.title) {
-      setValue("title", recommendedData.title);
+    if (recommendedBooks && recommendedBooks.title) {
+      setValue("title", recommendedBooks.title);
     }
-    if (recommendedData && recommendedData.author) {
-      setValue("author", recommendedData.author);
+    if (recommendedBooks && recommendedBooks.author) {
+      setValue("author", recommendedBooks.author);
     }
-  }, [setValue]);
+  }, [recommendedBooks, setValue]);
 
   const handleBook = ({ title, author }) => {
-    const recommendedData = JSON.parse(localStorage.getItem("recommended"));
-    const updatedData = {
-      ...recommendedData,
-      title,
-      author,
-    };
-
-    localStorage.setItem("recommended", JSON.stringify(updatedData));
-
-    if (title !== recommendedData.title || author !== recommendedData.author) {
-      setChanges(!changes);
-    }
+    dispatch(setRecommendData({ title, author }));
   };
   return (
     <ContentWraper>

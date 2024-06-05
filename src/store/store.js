@@ -21,13 +21,22 @@ const persistConfig = {
   whitelist: ["token", "refreshToken"],
 };
 
+const recommendPersistConfig = {
+  key: "recommended",
+  version: 1,
+  storage,
+};
+const recommendPersistedReducer = persistReducer(
+  recommendPersistConfig,
+  recommendReducer
+);
 const persistedReducer = persistReducer(persistConfig, authReducer);
 
 export const store = configureStore({
   reducer: {
     auth: persistedReducer,
     books: booksReducer,
-    recommend: recommendReducer,
+    recommend: recommendPersistedReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

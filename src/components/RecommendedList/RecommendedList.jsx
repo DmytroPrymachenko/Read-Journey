@@ -1,31 +1,33 @@
-import { useSelector } from "react-redux";
-import { selectRecommendedBooks } from "../../store/books/selectors";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  selectRecommended,
+  selectRecommendedBooks,
+} from "../../store/books/selectors";
 import { ContentWraper } from "../Filters/Filters.Styled";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { setRecommendData } from "../../store/recommend/recommendSlise";
 
-const RecommendedList = ({ setChanges, changes }) => {
+const RecommendedList = () => {
+  const dispatch = useDispatch();
+  const recommendedBooks = useSelector(selectRecommended);
   const booksList = useSelector(selectRecommendedBooks);
-  const [page, setPage] = useState(1);
-  console.log(booksList);
+
+  const [page, setPage] = useState(recommendedBooks.page || 1);
+
+  const changePage = (newPage) => {
+    setPage(newPage);
+    dispatch(setRecommendData({ ...recommendedBooks, page: newPage }));
+  };
+
   const prevPage = () => {
-    setPage((prevPage) => prevPage - 1);
-    setChanges(!changes);
+    const newPage = page - 1;
+    changePage(newPage);
   };
+
   const nextPage = () => {
-    setPage((prevPage) => prevPage + 1);
-    setChanges(!changes);
+    const newPage = page + 1;
+    changePage(newPage);
   };
-
-  useEffect(() => {
-    const recommendedData = JSON.parse(localStorage.getItem("recommended"));
-
-    const updatedData = {
-      ...recommendedData,
-      page,
-    };
-
-    localStorage.setItem("recommended", JSON.stringify(updatedData));
-  }, [page]);
 
   return (
     <ContentWraper>
