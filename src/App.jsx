@@ -2,9 +2,9 @@ import { Suspense, useEffect, useState } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import Layout from "./components/Layout/Layout";
 import Home from "./pages/Home/Home";
-import Library from "./pages/Library/Library";
+
 import ErrorPage from "./pages/ErrorPage/ErrorPage";
-import Reading from "./pages/Reading/Reading";
+
 import { Loader } from "./components/Loader/Loader";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import LoginPage from "./pages/LoginPage/LoginPage";
@@ -13,7 +13,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectUser } from "./store/auth/selectors";
 import PublicRoute from "./routes/PublicRoute";
 import PrivateRoute from "./routes/PrivateRoute";
-import RecommendedPage from "./pages/RecommendedPage/RecommendedPage";
+
+import LibraryPage from "./pages/LibraryPage/LibraryPage";
+import RecommendPage from "./pages/RecommendPage/RecommendPage";
+import ReadingPage from "./pages/ReadingPage/ReadingPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -51,7 +54,7 @@ function App() {
               path="/recommended"
               element={
                 <PrivateRoute>
-                  <RecommendedPage />
+                  <RecommendPage />
                 </PrivateRoute>
               }
             />
@@ -59,15 +62,15 @@ function App() {
               path="/library"
               element={
                 <PrivateRoute>
-                  <Library />
+                  <LibraryPage />
                 </PrivateRoute>
               }
             />
             <Route
-              path="/reading"
+              path="/reading/:id"
               element={
                 <PrivateRoute>
-                  <Reading />
+                  <ReadingPage />
                 </PrivateRoute>
               }
             />

@@ -1,12 +1,14 @@
+import { Test123 } from "./RecommendPage.Styled";
 import { useEffect, useState } from "react";
-import Filters from "../../components/Filters/Filters";
-import RecommendedList from "../../components/RecommendedList/RecommendedList";
+
 import { useDispatch, useSelector } from "react-redux";
 import { recommendedBooksThunk } from "../../store/books/operations";
 import { selectRecommended } from "../../store/books/selectors";
 import { setRecommendData } from "../../store/recommend/recommendSlise";
+import Filter from "../../components/Filter/Filter";
+import RecommBooksList from "../../components/RecommBooksList/RecommBooksList";
 
-const RecommendedPage = () => {
+const RecommendPage = () => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   const recommendedBooks = useSelector(selectRecommended);
@@ -48,15 +50,17 @@ const RecommendedPage = () => {
   }, [dispatch, recommendedBooks]);
 
   return (
-    <>
+    <Test123>
       <>
-        <Filters />
+        <>
+          <Filter />
+        </>
+        <>
+          <RecommBooksList />
+        </>
       </>
-      <>
-        <RecommendedList />
-      </>
-    </>
+    </Test123>
   );
 };
 
-export default RecommendedPage;
+export default RecommendPage;

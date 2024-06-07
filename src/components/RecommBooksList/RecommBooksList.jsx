@@ -3,12 +3,13 @@ import {
   selectRecommended,
   selectRecommendedBooks,
 } from "../../store/books/selectors";
-import { ContentWraper } from "../Filters/Filters.Styled";
+
 import { useState } from "react";
 import { setRecommendData } from "../../store/recommend/recommendSlise";
+import { ContentWraper } from "../Filter/Filter.Styled";
 import RecommendedItem from "../RecommendedItem/RecommendedItem";
 
-const RecommendedList = () => {
+const RecommBooksList = () => {
   const dispatch = useDispatch();
   const recommendedBooks = useSelector(selectRecommended);
   const booksList = useSelector(selectRecommendedBooks);
@@ -52,4 +53,4 @@ const RecommendedList = () => {
   );
 };
 
-export default RecommendedList;
+export default RecommBooksList;
