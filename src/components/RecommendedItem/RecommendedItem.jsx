@@ -1,11 +1,17 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import { addBookFromRecommendations } from "../../store/books/operations";
+import {
+  addBookFromRecommendations,
+  fetchUserBooks,
+} from "../../store/books/operations";
+import { selectUserBooks } from "../../store/books/selectors";
 
 const RecommendedItem = ({ book }) => {
   const [isModalItem, setIsModalItem] = useState(false);
   const dispatch = useDispatch();
+  const userBooks = useSelector(selectUserBooks);
+  console.log("Test Books", userBooks);
 
   const openModal = () => {
     setIsModalItem(true);
@@ -16,11 +22,20 @@ const RecommendedItem = ({ book }) => {
   };
 
   const handleAddBook = () => {
+    const isBookExists = userBooks.some(
+      (userBook) => userBook.title === book.title
+    );
+    if (isBookExists) {
+      toast.error("This book is already in your library!");
+      return;
+    }
+
     dispatch(addBookFromRecommendations(book._id))
       .unwrap()
       .then((data) => {
         toast.success("Book added successfully!");
         console.log("Book added:", data);
+        dispatch(fetchUserBooks());
       })
       .catch((error) => {
         toast.error("Error adding book: " + error.message);

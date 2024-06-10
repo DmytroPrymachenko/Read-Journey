@@ -1,5 +1,3 @@
-import { useSelector } from "react-redux";
-import { selectBookInfo } from "../../store/books/selectors";
 import ReadingForm from "../ReadingForm/ReadingForm";
 import ReadingStatistics from "../ReadingStatistics/ReadingStatistics";
 

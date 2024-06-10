@@ -27,18 +27,31 @@ const recommendPersistConfig = {
   version: 1,
   storage,
 };
+
+const readingPersistConfig = {
+  key: "userBooks",
+  version: 1,
+  storage,
+  whitelist: ["readingState"],
+};
+
 const recommendPersistedReducer = persistReducer(
   recommendPersistConfig,
   recommendReducer
 );
 const persistedReducer = persistReducer(persistConfig, authReducer);
 
+const readingPersistedReducer = persistReducer(
+  readingPersistConfig,
+  userBooksReducer
+);
+
 export const store = configureStore({
   reducer: {
     auth: persistedReducer,
     books: booksReducer,
     recommend: recommendPersistedReducer,
-    userBooks: userBooksReducer,
+    userBooks: readingPersistedReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

@@ -41,6 +41,7 @@ function App() {
       });
     }
   }, [dispatch, user]);
+
   return (
     <>
       <Suspense fallback={<Loader />}>
