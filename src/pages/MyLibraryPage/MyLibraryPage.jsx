@@ -1,7 +1,3 @@
-// import { Dashboard1 } from "../../components/ControlBoard/DashBoard1/DashBoard1";
-// import styled from "styled-components";
-// import * as yup from "yup";
-// import { yupResolver } from "@hookform/resolvers/yup";
 import { Dashboard } from "../../components/Dashboard/Dashboard";
 import { MyLibraryBooks } from "../../components/MyLibraryBooks/MyLibraryBooks";
 import { PageContainer } from "./MyLibraryPage.Styled";
@@ -10,12 +6,8 @@ import { addBookThunk } from "../../store/books/operations";
 import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-
-// const schema = yup.object({
-//   title: yup.string(),
-//   author: yup.string(),
-//   pages: yup.number(),
-// });
+import { createPortal } from "react-dom";
+import { AddBookModal } from "../../components/AddBookModal/AddBookModal";
 
 const MyLibraryPage = () => {
   const dispatch = useDispatch();
@@ -46,9 +38,9 @@ const MyLibraryPage = () => {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm({
     mode: "onChange",
-    // resolver: yupResolver(schema),
   });
 
   function onSubmit({ title, author, totalPages }) {
@@ -56,14 +48,12 @@ const MyLibraryPage = () => {
       .unwrap()
       .then(() => {
         toast.success("Congratulations! The book is added successfully!");
+        reset();
+        setModal(true);
       })
       .catch((err) => {
         toast.error(err);
       });
-  }
-
-  function handleClick() {
-    setModal(true);
   }
 
   return (
@@ -78,10 +68,10 @@ const MyLibraryPage = () => {
         onSubmit={onSubmit}
         errors={errors}
         validation={true}
-        handleClick={handleClick}
       />
       <MyLibraryBooks />
-      createPo
+      {modal &&
+        createPortal(<AddBookModal setModal={setModal} />, document.body)}
     </PageContainer>
   );
 };
