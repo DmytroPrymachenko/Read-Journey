@@ -12,6 +12,10 @@ const userBooksSlice = createSlice({
   initialState: {
     userBooks: [],
     bookInfo: null,
+    readingState: {
+      isReading: false,
+      readingBookId: null,
+    },
     isLoading: false,
     error: null,
   },
@@ -64,6 +68,10 @@ const userBooksSlice = createSlice({
         state.error = null;
       })
       .addCase(startReadingBook.fulfilled, (state, { payload }) => {
+        state.readingState = {
+          isReading: true,
+          readingBookId: payload._id,
+        };
         state.bookInfo = payload;
         state.isLoading = false;
         state.error = null;
@@ -77,6 +85,10 @@ const userBooksSlice = createSlice({
         state.error = null;
       })
       .addCase(finishReadingBook.fulfilled, (state, { payload }) => {
+        state.readingState = {
+          isReading: false,
+          readingBookId: null,
+        };
         state.bookInfo = payload;
         state.isLoading = false;
         state.error = null;

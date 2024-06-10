@@ -2,7 +2,10 @@ import { Test123 } from "./RecommendPage.Styled";
 import { useEffect, useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
-import { recommendedBooksThunk } from "../../store/books/operations";
+import {
+  fetchUserBooks,
+  recommendedBooksThunk,
+} from "../../store/books/operations";
 import { selectRecommended } from "../../store/books/selectors";
 import { setRecommendData } from "../../store/recommend/recommendSlise";
 import RecommBooksList from "../../components/RecommBooksList/RecommBooksList";
@@ -14,9 +17,7 @@ import Filter from "../../components/Filter/Filter";
 
 const RecommendPage = () => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
   const recommendedBooks = useSelector(selectRecommended);
-
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -39,6 +40,10 @@ const RecommendPage = () => {
 
     dispatch(setRecommendData({ ...currentData, limit }));
   }, [dispatch, windowWidth, recommendedBooks]);
+
+  useEffect(() => {
+    dispatch(fetchUserBooks());
+  }, [dispatch]);
 
   useEffect(() => {
     if (recommendedBooks) {
