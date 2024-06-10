@@ -5,8 +5,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { recommendedBooksThunk } from "../../store/books/operations";
 import { selectRecommended } from "../../store/books/selectors";
 import { setRecommendData } from "../../store/recommend/recommendSlise";
-import Filter from "../../components/Filter/Filter";
 import RecommBooksList from "../../components/RecommBooksList/RecommBooksList";
+import Filter from "../../components/Filter/Filter";
+
+// import styled from "styled-components";
+
+// const Test = styled.div``;
 
 const RecommendPage = () => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -52,6 +56,12 @@ const RecommendPage = () => {
   return (
     <Test123>
       <>
+        {/* <>
+          <Filter />
+        </>
+        <>
+          <RecommBooksList />
+        </> */}
         <>
           <Filter />
         </>

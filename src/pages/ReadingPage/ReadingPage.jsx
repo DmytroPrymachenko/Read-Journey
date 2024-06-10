@@ -3,6 +3,11 @@ import { selectBookInfo } from "../../store/books/selectors";
 import { useParams } from "react-router-dom";
 import { fetchBookInfo } from "../../store/books/operations";
 import { useEffect } from "react";
+import Progress from "../../components/Progress/Progress";
+
+// import styled from "styled-components";
+
+// const Test = styled.div``;
 
 const ReadingPage = () => {
   const { id } = useParams();
@@ -19,9 +24,19 @@ const ReadingPage = () => {
   console.log("bookInfo", bookInfo);
 
   if (!bookInfo) {
-    return <div>Loading...</div>;
+    return (
+      <>
+        <div>Loader</div>
+      </>
+    );
   }
-  return <div>{bookInfo.title}</div>;
+  return (
+    <>
+      <>
+        <Progress />
+      </>
+    </>
+  );
 };
 
 export default ReadingPage;

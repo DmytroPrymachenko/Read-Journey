@@ -133,7 +133,7 @@ export const WorkoutLinkWraper = styled.div`
   justify-content: space-between;
 `;
 
-export const WorkoutLink = (styled.div = styled(NavLink)`
+export const WorkoutLink = styled(NavLink)`
   font-weight: 500;
   font-size: 14px;
   line-height: 129%;
@@ -147,4 +147,4 @@ export const WorkoutLink = (styled.div = styled(NavLink)`
   &:hover {
     transform: scale(1.1);
   }
-`);
+`;

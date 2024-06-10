@@ -6,7 +6,7 @@ import {
 
 import { useState } from "react";
 import { setRecommendData } from "../../store/recommend/recommendSlise";
-import { ContentWraper } from "../Filter/Filter.Styled";
+
 import RecommendedItem from "../RecommendedItem/RecommendedItem";
 
 const RecommBooksList = () => {
@@ -33,7 +33,7 @@ const RecommBooksList = () => {
 
   return (
     <>
-      <ContentWraper>
+      <>
         <div>
           <h1>Recommended</h1>
           <div>
@@ -48,7 +48,7 @@ const RecommBooksList = () => {
             </ul>
           </div>
         </div>
-      </ContentWraper>
+      </>
     </>
   );
 };
