@@ -8,6 +8,7 @@ export const HeaderContainer = styled.div`
   align-items: center;
   padding: 0 20px;
   height: 57px;
+  margin-top: 20px;
 `;
 export const HeaderIconUser = styled.div`
   width: 35px;

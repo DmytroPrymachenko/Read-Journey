@@ -23,7 +23,6 @@ export const Dashboard = ({
   onSubmit,
   errors,
   validation,
-  handleClick,
 }) => {
   // const validation = false;
   function chooseSecondPart(string) {
@@ -86,7 +85,7 @@ export const Dashboard = ({
             name="submit"
             type="submit"
             aria-label={titleButton}
-            onSubmit={handleClick}
+            // onSubmit={handleClick}
           >
             {titleButton}
           </SubmitButton>

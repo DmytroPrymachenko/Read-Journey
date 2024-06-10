@@ -17,7 +17,7 @@ export const Title = styled.h2`
   font-size: 18px;
   letter-spacing: -0.02em;
   /* text-align: center; */
-  color: var(--white);
+  color: #e3e3e3;
 `;
 export const LinksWrap = styled.div`
   width: 100%;
