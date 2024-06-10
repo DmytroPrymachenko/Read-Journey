@@ -1,17 +1,18 @@
 import styled from "styled-components";
-import { Container } from "../../components/Layout/Layout.Styled";
+// import { Container } from "../../components/Layout/Layout.Styled";
 
-export const AuthContainer = styled(Container)`
+export const PageContainer = styled.div`
+  padding-top: 10px;
   display: flex;
   flex-direction: column;
   gap: 10px;
-  padding-bottom: 20px;
+  padding-bottom: 40px;
   @media only screen and (min-width: 768px) {
+    padding-top: 16px;
     padding-bottom: 32px;
+    gap: 16px;
   }
   @media only screen and (min-width: 1280px) {
-    flex-direction: row;
-    gap: 16px;
-    /* padding: 32px; */
+    padding: 27px;
   }
 `;

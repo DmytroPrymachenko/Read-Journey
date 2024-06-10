@@ -112,3 +112,17 @@ export const finishReadingBook = createAsyncThunk(
     }
   }
 );
+export const addBookThunk = createAsyncThunk(
+  "books/add",
+  async (body, thunkAPI) => {
+    try {
+      const { data } = await api.post("books/add", body);
+      console.log(data);
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(
+        error.response.data.message ?? error.message
+      );
+    }
+  }
+);

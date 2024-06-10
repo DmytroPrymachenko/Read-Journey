@@ -1,59 +1,58 @@
-import { Suspense, useEffect, useState } from "react";
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Suspense, useEffect } from "react";
+import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import Layout from "./components/Layout/Layout";
-import Home from "./pages/Home/Home";
-
-import ErrorPage from "./pages/ErrorPage/ErrorPage";
-
+// import Reading from "./pages/Reading/Reading";
 import { Loader } from "./components/Loader/Loader";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import LoginPage from "./pages/LoginPage/LoginPage";
-import { currentThunk } from "./store/auth/operations";
+import { currentThunk, refreshTokensThunk } from "./store/auth/operations";
 import { useDispatch, useSelector } from "react-redux";
-import { selectUser } from "./store/auth/selectors";
+import { selectExpireTime, selectUser } from "./store/auth/selectors";
 import PublicRoute from "./routes/PublicRoute";
 import PrivateRoute from "./routes/PrivateRoute";
 
-import LibraryPage from "./pages/LibraryPage/LibraryPage";
+import { toast } from "react-toastify";
+import { setPath } from "./store/books/booksSlise";
 
-import ReadingPage from "./pages/ReadingPage/ReadingPage";
 import RecommendPage from "./pages/RecommendPage/RecommendPage";
-import styled from "styled-components";
-
-const Test = styled.div``;
+import MyLibraryPage from "./pages/MyLibraryPage/MyLibraryPage";
+import ReadingPage from "./pages/ReadingPage/ReadingPage";
 
 function App() {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
+  const expireTime = useSelector(selectExpireTime);
   const { pathname } = useLocation();
 
-  const [location, setLocation] = useState(pathname);
-
+  console.log(pathname);
   useEffect(() => {
-    setLocation(pathname);
-  }, [pathname, location]);
+    if (pathname === "/register" || pathname === "/login") {
+      return;
+    }
+    dispatch(setPath(pathname));
+  });
 
-  console.log(user);
   useEffect(() => {
     if (!user) {
-      dispatch(currentThunk()).catch((error) => {
-        console.error("Error fetching user data:", error);
-      });
+      if (expireTime >= Date.now()) {
+        dispatch(currentThunk()).catch((error) => {
+          console.error("Error fetching user data:", error);
+        });
+      } else {
+        dispatch(refreshTokensThunk())
+          .unwrap()
+          .then(() => {
+            dispatch(currentThunk()).catch((error) => toast.error(error));
+          })
+          .catch((error) => toast.error(error));
+      }
     }
-  }, [dispatch, user]);
+  }, [dispatch, user, expireTime]);
   return (
     <>
       <Suspense fallback={<Loader />}>
         <Routes>
-          <Route element={<Layout />}>
-            <Route
-              path="/"
-              element={
-                <PrivateRoute>
-                  <Home />
-                </PrivateRoute>
-              }
-            />
+          <Route path="/" element={<Layout />}>
             <Route
               path="/recommended"
               element={
@@ -66,7 +65,7 @@ function App() {
               path="/library"
               element={
                 <PrivateRoute>
-                  <LibraryPage />
+                  <MyLibraryPage />
                 </PrivateRoute>
               }
             />
@@ -99,7 +98,7 @@ function App() {
               }
             />
           </>
-          <Route path="*" element={<ErrorPage />} />
+          <Route path="*" element={<Navigate to="/recommended" />} />
         </Routes>
       </Suspense>
     </>

@@ -27,16 +27,23 @@ const recommendPersistConfig = {
   version: 1,
   storage,
 };
+const persistConfigBooks = {
+  key: "books",
+  version: 1,
+  storage,
+  whitelist: ["path"],
+};
 const recommendPersistedReducer = persistReducer(
   recommendPersistConfig,
   recommendReducer
 );
 const persistedReducer = persistReducer(persistConfig, authReducer);
+const persistedReducerBooks = persistReducer(persistConfigBooks, booksReducer);
 
 export const store = configureStore({
   reducer: {
     auth: persistedReducer,
-    books: booksReducer,
+    books: persistedReducerBooks,
     recommend: recommendPersistedReducer,
     userBooks: userBooksReducer,
   },
