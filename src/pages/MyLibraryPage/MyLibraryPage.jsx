@@ -2,10 +2,10 @@ import { Dashboard } from "../../components/Dashboard/Dashboard";
 import { MyLibraryBooks } from "../../components/MyLibraryBooks/MyLibraryBooks";
 import { PageContainer } from "./MyLibraryPage.Styled";
 import { useDispatch } from "react-redux";
-import { addBookThunk } from "../../store/books/operations";
+import { addBookThunk, fetchUserBooks } from "../../store/books/operations";
 import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { AddBookModal } from "../../components/AddBookModal/AddBookModal";
 
@@ -49,12 +49,17 @@ const MyLibraryPage = () => {
       .then(() => {
         toast.success("Congratulations! The book is added successfully!");
         reset();
+        dispatch(fetchUserBooks());
         setModal(true);
       })
       .catch((err) => {
         toast.error(err);
       });
   }
+
+  useEffect(() => {
+    dispatch(fetchUserBooks());
+  }, [dispatch]);
 
   return (
     <PageContainer>
