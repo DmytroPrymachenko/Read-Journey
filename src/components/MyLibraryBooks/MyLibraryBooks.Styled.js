@@ -7,7 +7,7 @@ export const MyLibraryWrap = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 63px;
+  gap: ${(props) => (props.$length === 0 ? "63px" : "14px")};
 `;
 export const TopWrap = styled.div`
   display: flex;
@@ -47,4 +47,12 @@ export const Span = styled.span`
   font-size: 14px;
   line-height: 1.28571;
   color: var(--input-title);
+`;
+export const MyBookList = styled.ul`
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: space-between;
+  row-gap: 10px;
+  /* gap: calc() */
 `;
