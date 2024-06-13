@@ -3,12 +3,8 @@ import NextSVG from "../../images/NextSVG";
 import { Link } from "react-router-dom";
 
 export const RecommendedBooksWrap = styled.div`
-  /* display: flex;
-  flex-direction: column;
-  gap: 20px; */
   background: var(--input-bg);
   border-radius: 12px;
-  /* align-items: flex-start; */
   padding: 20px;
 `;
 export const Title = styled.h2`
@@ -16,7 +12,7 @@ export const Title = styled.h2`
   line-height: 1;
   font-size: 18px;
   letter-spacing: -0.02em;
-  /* text-align: center; */
+
   color: #e3e3e3;
 `;
 export const LinksWrap = styled.div`
@@ -37,7 +33,6 @@ export const LinkNextSVG = styled(Link)`
   width: 20px;
   height: 20px;
   display: flex;
-  /* align-self: flex-start; */
 `;
 export const NextSVGStyled = styled(NextSVG)`
   width: 20px;
