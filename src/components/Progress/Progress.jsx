@@ -1,5 +1,6 @@
 import ReadingForm from "../ReadingForm/ReadingForm";
 import ReadingStatistics from "../ReadingStatistics/ReadingStatistics";
+import { ProgressWraper } from "./ProgressStyled";
 
 // import styled from "styled-components";
 
@@ -7,14 +8,14 @@ import ReadingStatistics from "../ReadingStatistics/ReadingStatistics";
 
 const Progress = () => {
   return (
-    <>
+    <ProgressWraper>
       <>
         <ReadingForm />
       </>
       <>
         <ReadingStatistics />
       </>
-    </>
+    </ProgressWraper>
   );
 };
 

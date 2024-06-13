@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { fetchBookInfo } from "../../store/books/operations";
 import { useEffect } from "react";
 import Progress from "../../components/Progress/Progress";
+import ReadingBook from "../../components/ReadingBook/ReadingBook";
 
 // import styled from "styled-components";
 
@@ -34,6 +35,9 @@ const ReadingPage = () => {
     <>
       <>
         <Progress />
+      </>
+      <>
+        <ReadingBook />
       </>
     </>
   );

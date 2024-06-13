@@ -1,17 +1,32 @@
 import { useSelector } from "react-redux";
-import { selectBookInfo } from "../../store/books/selectors";
-import Star from "../../images/Star";
-import { NotStartedComponent } from "./ReadingStatistics.Styled";
+import {
+  selectBookInfo,
+  selectBookProgress,
+} from "../../store/books/selectors";
+
+import {
+  NotStartedComponent,
+  ReadingStatisticsButton,
+  SectionSelectionWraper,
+  StarWraper,
+  StatisticsWraper,
+} from "./ReadingStatistics.Styled";
 import { useState } from "react";
+import DiaryComponent from "../DiaryComponent/DiaryComponent";
+import StatisticsComponent from "../StatisticsComponent/StatisticsComponent";
+import DiarySVG from "../../images/DiarySVG";
+import StatisticsSVG from "../../images/StatisticsSVG";
+import StarPNG from "../../images/StarPNG.png";
 
 const ReadingStatistics = () => {
   const [activeSection, setActiveSection] = useState("Diary");
   const bookInfo = useSelector(selectBookInfo);
-  console.log(bookInfo);
+  const bookProgress = useSelector(selectBookProgress);
+  console.log("bookInfo", bookInfo);
 
   return (
-    <div>
-      <>
+    <>
+      {bookProgress.length === 0 ? (
         <NotStartedComponent>
           <div>
             <h1>Progress</h1>
@@ -20,27 +35,34 @@ const ReadingStatistics = () => {
               the red button above.
             </span>
           </div>
-          <div>
-            <Star />
-          </div>
+          <StarWraper>
+            <img src={StarPNG} alt="Star" />
+          </StarWraper>
         </NotStartedComponent>
-      </>
-      <>
-        <div>
-          <h1>{activeSection}</h1>
-          <div>
-            <button onClick={() => setActiveSection("Diary")}>Diary</button>
-            <button onClick={() => setActiveSection("Statistics")}>
-              Statistics
-            </button>
-          </div>
-        </div>
+      ) : (
         <>
-          {activeSection === "Diary" && <div>Component Diary</div>}
-          {activeSection === "Statistics" && <div>Component Statistics</div>}
+          <SectionSelectionWraper>
+            <h1>{activeSection}</h1>
+            <div>
+              <ReadingStatisticsButton
+                onClick={() => setActiveSection("Diary")}
+              >
+                <DiarySVG active={activeSection === "Diary"} />
+              </ReadingStatisticsButton>
+              <ReadingStatisticsButton
+                onClick={() => setActiveSection("Statistics")}
+              >
+                <StatisticsSVG active={activeSection === "Statistics"} />
+              </ReadingStatisticsButton>
+            </div>
+          </SectionSelectionWraper>
+          <StatisticsWraper>
+            {activeSection === "Diary" && <DiaryComponent />}
+            {activeSection === "Statistics" && <StatisticsComponent />}
+          </StatisticsWraper>
         </>
-      </>
-    </div>
+      )}
+    </>
   );
 };
 

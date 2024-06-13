@@ -15,6 +15,8 @@ const userBooksSlice = createSlice({
     readingState: {
       isReading: false,
       readingBookId: null,
+      start: null,
+      finish: null,
     },
     isLoading: false,
     error: null,
