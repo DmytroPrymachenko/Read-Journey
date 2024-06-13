@@ -12,7 +12,6 @@ export const Title = styled.h2`
   line-height: 1;
   font-size: 18px;
   letter-spacing: -0.02em;
-
   color: #e3e3e3;
 `;
 export const LinksWrap = styled.div`

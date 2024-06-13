@@ -1,9 +1,13 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import book from "../../images/myLibraryBooksImages/book.png";
 import book2x from "../../images/myLibraryBooksImages/book@2x.png";
 import bookMobile from "../../images/myLibraryBooksImages/bookMobile.png";
 import bookMobile2x from "../../images/myLibraryBooksImages/bookMobile@2x.png";
-import { selectUserBooks } from "../../store/books/selectors";
+import {
+  selectOption,
+  selectUserBooks,
+  selectfilteredUserBooks,
+} from "../../store/books/selectors";
 import MyBooksFilter from "../MyBooksFilter/MyBooksFilter";
 import {
   ContentWrap,
@@ -16,14 +20,36 @@ import {
   TopWrap,
 } from "./MyLibraryBooks.Styled";
 import LibraryItem from "../LibraryItem/LibraryItem";
+import {
+  getfilteredUserBooks,
+  setOption,
+} from "../../store/books/userBooksSlise";
+import { useEffect, useState } from "react";
 export const MyLibraryBooks = () => {
   const userBooks = useSelector(selectUserBooks);
-  console.log(userBooks);
+  const filteredUserBooks = useSelector(selectfilteredUserBooks);
+  const option = useSelector(selectOption);
+  const [selectedOption, setSelectedOption] = useState(option);
+  const dispatch = useDispatch();
+  console.log(selectedOption);
+
+  useEffect(() => {
+    dispatch(setOption(selectedOption));
+    console.log(selectedOption);
+    if (selectedOption) {
+      dispatch(getfilteredUserBooks(selectedOption.value));
+      console.log(selectedOption.value);
+    }
+  }, [dispatch, selectedOption]);
+
   return (
     <MyLibraryWrap $length={userBooks?.length}>
       <TopWrap>
         <Title>My library</Title>
-        <MyBooksFilter />
+        <MyBooksFilter
+          selectedOption={selectedOption}
+          setSelectedOption={setSelectedOption}
+        />
       </TopWrap>
       {userBooks?.length === 0 ? (
         <ContentWrap>
@@ -42,9 +68,13 @@ export const MyLibraryBooks = () => {
         </ContentWrap>
       ) : (
         <MyBookList>
-          {userBooks.map((book) => (
-            <LibraryItem key={book._id} book={book} />
-          ))}
+          {!selectedOption
+            ? userBooks.map((book) => (
+                <LibraryItem key={book._id} book={book} />
+              ))
+            : filteredUserBooks.map((book) => (
+                <LibraryItem key={book._id} book={book} />
+              ))}
         </MyBookList>
       )}
     </MyLibraryWrap>

@@ -13,7 +13,9 @@ export const Cover = styled.div`
   border: ${(props) => (props.$image ? "none" : "1px solid #3e3e3e")};
 `;
 export const LibraryItemImg = styled.img`
-  display: ${(props) => (props.$image ? "blok" : "none")};
+  border-radius: 8px;
+  height: 100%;
+  /* display: ${(props) => (props.$image ? "blok" : "none")}; */
 `;
 export const CoverText = styled.p`
   font-weight: 500;

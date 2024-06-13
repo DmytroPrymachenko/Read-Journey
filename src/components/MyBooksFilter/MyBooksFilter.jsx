@@ -1,16 +1,13 @@
-import { useState } from "react";
 import { FilterSelect } from "./MyBooksFilter.Styled";
 
 const options = [
-  { value: "desc", label: "Unread" },
-  { value: "after10", label: "In progress" },
-  { value: "past10", label: "Done" },
-  { value: "all", label: "All books" },
+  { value: "unread", label: "Unread" },
+  { value: "in-progress", label: "In progress" },
+  { value: "done", label: "Done" },
+  { value: "all-books", label: "All books" },
 ];
 
-const MyBooksFilter = () => {
-  const [selectedOption, setSelectedOption] = useState(null);
-
+const MyBooksFilter = ({ selectedOption, setSelectedOption }) => {
   return (
     <FilterSelect
       onChange={setSelectedOption}

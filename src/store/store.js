@@ -38,7 +38,7 @@ const readingPersistConfig = {
   key: "userBooks",
   version: 1,
   storage,
-  whitelist: ["readingState"],
+  whitelist: ["readingState", "userBooks"],
 };
 
 const recommendPersistedReducer = persistReducer(
