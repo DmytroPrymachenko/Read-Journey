@@ -63,7 +63,7 @@ function App() {
               path="/library"
               element={
                 <PrivateRoute>
-                  <LibraryPage />
+                  <MyLibraryPage />
                 </PrivateRoute>
               }
             />

@@ -11,6 +11,8 @@ const userBooksSlice = createSlice({
   name: "userBooks",
   initialState: {
     userBooks: [],
+    filteredUserBooks: [],
+    option: null,
     bookInfo: null,
     readingState: {
       isReading: false,
@@ -19,7 +21,23 @@ const userBooksSlice = createSlice({
     isLoading: false,
     error: null,
   },
-  reducers: {},
+  reducers: {
+    getfilteredUserBooks(state, { payload }) {
+      if (state.userBooks.length !== 0) {
+        if (payload === "all-books") {
+          console.log(payload);
+          state.filteredUserBooks = state.userBooks;
+        } else {
+          state.filteredUserBooks = state.userBooks.filter(
+            (book) => book.status === payload
+          );
+        }
+      }
+    },
+    setOption(state, { payload }) {
+      state.option = payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchUserBooks.pending, (state) => {
@@ -101,3 +119,4 @@ const userBooksSlice = createSlice({
 });
 
 export const userBooksReducer = userBooksSlice.reducer;
+export const { getfilteredUserBooks, setOption } = userBooksSlice.actions;

@@ -36,7 +36,7 @@ const LibraryItem = ({ book }) => {
         </Cover>
         <Description>
           <TextWrap>
-            <Title>{cutString(book.title, 16)}</Title>
+            <Title>{cutString(book.title, 19)}</Title>
             <Author>{cutString(book.author, 20)}</Author>
           </TextWrap>
           <DeleteButton onClick={() => dispatch(deleteUserBook(book._id))}>
