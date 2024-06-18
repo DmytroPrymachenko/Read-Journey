@@ -26,7 +26,7 @@ export const Modal = styled.div`
   gap: 20px;
   align-items: center;
 `;
-export const CloseButton = styled.div`
+export const CloseButton = styled.button`
   position: absolute;
   top: 16px;
   right: 16px;

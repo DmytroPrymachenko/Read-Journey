@@ -46,16 +46,16 @@ const RecommendPage = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    if (recommendedBooks) {
-      dispatch(
-        recommendedBooksThunk({
-          title: recommendedBooks.title,
-          author: recommendedBooks.author,
-          page: recommendedBooks.page,
-          limit: recommendedBooks.limit,
-        })
-      );
-    }
+    // if (recommendedBooks) {
+    dispatch(
+      recommendedBooksThunk({
+        title: recommendedBooks.title,
+        author: recommendedBooks.author,
+        page: recommendedBooks.page,
+        limit: recommendedBooks.limit,
+      })
+    );
+    // }
   }, [dispatch, recommendedBooks]);
 
   return (
