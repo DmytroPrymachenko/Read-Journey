@@ -4,7 +4,8 @@ export const BookItem = styled.li`
   display: flex;
   flex-direction: column;
   gap: 8px;
-  width: 137px;
+  width: calc((100% - 8px) / 2);
+  max-width: 137px;
 `;
 export const Cover = styled.div`
   border-radius: 8px;
