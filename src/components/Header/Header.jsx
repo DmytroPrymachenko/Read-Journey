@@ -3,12 +3,15 @@ import Logo from "../../images/Logo";
 import {
   HeaderButtonBurger,
   HeaderContainer,
+  HeaderDivLink,
   HeaderIconUser,
+  HeaderLink,
+  HeaderTabletLogOut,
   HeaderUserContainer,
 } from "./Header.Styled";
 import { selectUser } from "../../store/auth/selectors";
 import BurgerOpen from "../../images/BurgerOpen";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import MobaleBurger from "../Modal/MobaleBurger/MobaleBurger";
 import Backdrop from "../Backdrop/Backdrop";
 import { useNavigate } from "react-router-dom";
@@ -44,6 +47,20 @@ const Header = () => {
     setIsBackdropActiveOpen(false);
   };
 
+  const [isTabletView, setIsTabletView] = useState(window.innerWidth >= 768);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsTabletView(window.innerWidth >= 768);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
     <>
       <>
@@ -60,15 +77,52 @@ const Header = () => {
       </>
       <HeaderContainer>
         <Logo />
-
-        <HeaderUserContainer>
-          <HeaderIconUser>
-            <span>{userName}</span>
-          </HeaderIconUser>
-          <HeaderButtonBurger onClick={handleBurgerOpen}>
-            <BurgerOpen />
-          </HeaderButtonBurger>
-        </HeaderUserContainer>
+        <>
+          {isTabletView ? (
+            <>
+              <HeaderDivLink>
+                <HeaderLink
+                  to="/recommended"
+                  aria-label="Home"
+                  style={{ textDecoration: "none" }}
+                >
+                  Home
+                </HeaderLink>
+                <HeaderLink
+                  to="/library"
+                  aria-label="My library"
+                  style={{ textDecoration: "none" }}
+                >
+                  My library
+                </HeaderLink>
+                {/* {user && (
+                  <HeaderLink
+                    to="/favorites"
+                    aria-label="Teachers"
+                    style={{ textDecoration: "none" }}
+                  >
+                    Favorites
+                  </HeaderLink>
+                )} */}
+              </HeaderDivLink>
+              <HeaderUserContainer>
+                <HeaderIconUser>
+                  <span>{userName}</span>
+                </HeaderIconUser>
+                <HeaderTabletLogOut>Log out</HeaderTabletLogOut>
+              </HeaderUserContainer>
+            </>
+          ) : (
+            <HeaderUserContainer>
+              <HeaderIconUser>
+                <span>{userName}</span>
+              </HeaderIconUser>
+              <HeaderButtonBurger onClick={handleBurgerOpen}>
+                <BurgerOpen />
+              </HeaderButtonBurger>
+            </HeaderUserContainer>
+          )}
+        </>
       </HeaderContainer>
     </>
   );

@@ -6,6 +6,9 @@ export const NotStartedComponent = styled.div`
   gap: 20px;
 
   align-items: center;
+  @media (min-width: 768px) {
+    max-width: 305px;
+  }
 
   & > div {
     h1 {
@@ -32,6 +35,10 @@ export const StatisticsWraper = styled.div`
   background: #262626;
   display: flex;
   justify-content: center;
+  height: 211px;
+  @media (min-width: 768px) {
+    height: 252px;
+  }
 `;
 const hoverAnimation = keyframes`
   0% {
@@ -59,7 +66,12 @@ export const ReadingStatisticsButton = styled.button`
 export const SectionSelectionWraper = styled.div`
   display: flex;
   justify-content: space-between;
+
   padding-bottom: 20px;
+
+  @media (min-width: 768px) {
+    padding-right: 16px;
+  }
 
   & > :first-child {
     font-weight: 700;

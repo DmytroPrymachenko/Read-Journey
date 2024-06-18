@@ -6,6 +6,11 @@ import {
   fetchUserBooks,
 } from "../../store/books/operations";
 import { selectUserBooks } from "../../store/books/selectors";
+import {
+  RecommendedItemImg,
+  RecommendedItemTitlewraper,
+} from "./RecommendedItem.Styled";
+import RecommendedModalItem from "./RecommendedModalItem";
 
 const RecommendedItem = ({ book }) => {
   const [isModalItem, setIsModalItem] = useState(false);
@@ -43,26 +48,40 @@ const RecommendedItem = ({ book }) => {
       });
   };
 
+  const capitalizeWord = (word) => {
+    if (word.length === 0) return "";
+    return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+  };
+
+  const transformTitle = (title) => {
+    const words = title.split(" ");
+    const transformedWords = words.map((word) =>
+      word.charAt(0) === word.charAt(0).toUpperCase()
+        ? capitalizeWord(word)
+        : word
+    );
+    return transformedWords.join(" ");
+  };
+
+  const truncatedTitle =
+    book.title.length > 23
+      ? `${transformTitle(book.title.substring(0, 20))}...`
+      : transformTitle(book.title);
   return (
     <>
-      <>
-        {isModalItem && (
-          <>
-            <div onClick={closeModal}>
-              <div>
-                <img src={book.imageUrl} alt={book.title} />
-              </div>
-              <button onClick={handleAddBook}>Додати в улюблені</button>
-            </div>
-          </>
-        )}
-      </>
+      {isModalItem && (
+        <RecommendedModalItem
+          closeModal={closeModal}
+          book={book}
+          handleAddBook={handleAddBook}
+        />
+      )}
       <li key={book._id} onClick={openModal}>
-        <img src={book.imageUrl} alt={book.title} />
-        <div>
-          <span>{book.title}</span>
+        <RecommendedItemImg src={book.imageUrl} alt={book.title} />
+        <RecommendedItemTitlewraper>
+          <span>{truncatedTitle}</span>
           <span>{book.author}</span>
-        </div>
+        </RecommendedItemTitlewraper>
       </li>
     </>
   );

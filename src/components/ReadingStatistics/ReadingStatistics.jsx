@@ -11,18 +11,26 @@ import {
   StarWraper,
   StatisticsWraper,
 } from "./ReadingStatistics.Styled";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import DiaryComponent from "../DiaryComponent/DiaryComponent";
 import StatisticsComponent from "../StatisticsComponent/StatisticsComponent";
 import DiarySVG from "../../images/DiarySVG";
 import StatisticsSVG from "../../images/StatisticsSVG";
 import StarPNG from "../../images/StarPNG.png";
 
-const ReadingStatistics = () => {
+const ReadingStatistics = ({ setIsTimeLeft }) => {
   const [activeSection, setActiveSection] = useState("Diary");
   const bookInfo = useSelector(selectBookInfo);
   const bookProgress = useSelector(selectBookProgress);
   console.log("bookInfo", bookInfo);
+
+  useEffect(() => {
+    if (activeSection === "Statistics") {
+      setIsTimeLeft(true);
+    } else {
+      setIsTimeLeft(false);
+    }
+  }, [activeSection, setIsTimeLeft]);
 
   return (
     <>
@@ -40,7 +48,7 @@ const ReadingStatistics = () => {
           </StarWraper>
         </NotStartedComponent>
       ) : (
-        <>
+        <div>
           <SectionSelectionWraper>
             <h1>{activeSection}</h1>
             <div>
@@ -60,7 +68,7 @@ const ReadingStatistics = () => {
             {activeSection === "Diary" && <DiaryComponent />}
             {activeSection === "Statistics" && <StatisticsComponent />}
           </StatisticsWraper>
-        </>
+        </div>
       )}
     </>
   );

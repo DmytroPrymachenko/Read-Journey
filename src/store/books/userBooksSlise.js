@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
+  deleteReadingRecord,
   deleteUserBook,
   fetchBookInfo,
   fetchUserBooks,
@@ -48,6 +49,18 @@ const userBooksSlice = createSlice({
         state.userBooks = payload;
         state.isLoading = false;
         state.error = null;
+
+        if (state.readingState.isReading && state.readingState.readingBookId) {
+          const readingBookExists = state.userBooks.some(
+            (book) => book._id === state.readingState.readingBookId
+          );
+          if (!readingBookExists) {
+            state.readingState = {
+              isReading: false,
+              readingBookId: null,
+            };
+          }
+        }
       })
       .addCase(fetchUserBooks.rejected, (state, { payload }) => {
         state.isLoading = false;
@@ -63,6 +76,18 @@ const userBooksSlice = createSlice({
         );
         state.isLoading = false;
         state.error = null;
+
+        if (state.readingState.isReading && state.readingState.readingBookId) {
+          const readingBookExists = state.userBooks.some(
+            (book) => book._id === state.readingState.readingBookId
+          );
+          if (!readingBookExists) {
+            state.readingState = {
+              isReading: false,
+              readingBookId: null,
+            };
+          }
+        }
       })
       .addCase(deleteUserBook.rejected, (state, { payload }) => {
         state.isLoading = false;
@@ -112,6 +137,19 @@ const userBooksSlice = createSlice({
         state.error = null;
       })
       .addCase(finishReadingBook.rejected, (state, { payload }) => {
+        state.isLoading = false;
+        state.error = payload;
+      })
+      .addCase(deleteReadingRecord.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(deleteReadingRecord.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.bookInfo = payload;
+        state.error = null;
+      })
+      .addCase(deleteReadingRecord.rejected, (state, { payload }) => {
         state.isLoading = false;
         state.error = payload;
       });

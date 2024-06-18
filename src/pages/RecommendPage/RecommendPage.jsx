@@ -61,12 +61,6 @@ const RecommendPage = () => {
   return (
     <Test123>
       <>
-        {/* <>
-          <Filter />
-        </>
-        <>
-          <RecommBooksList />
-        </> */}
         <>
           <Filter />
         </>
