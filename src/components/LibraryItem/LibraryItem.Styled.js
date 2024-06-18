@@ -10,6 +10,7 @@ export const Cover = styled.div`
   border-radius: 8px;
   width: 100%;
   height: 208px;
+  cursor: pointer;
   border: ${(props) => (props.$image ? "none" : "1px solid #3e3e3e")};
 `;
 export const LibraryItemImg = styled.img`

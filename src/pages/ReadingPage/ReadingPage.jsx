@@ -12,6 +12,7 @@ import ReadingBook from "../../components/ReadingBook/ReadingBook";
 
 const ReadingPage = () => {
   const { id } = useParams();
+  console.log(useParams());
   const dispatch = useDispatch();
   const bookInfo = useSelector(selectBookInfo);
 
