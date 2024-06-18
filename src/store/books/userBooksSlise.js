@@ -42,12 +42,12 @@ const userBooksSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchUserBooks.pending, (state) => {
-        state.isLoading = true;
+        // state.isLoading = true;
         state.error = null;
       })
       .addCase(fetchUserBooks.fulfilled, (state, { payload }) => {
         state.userBooks = payload;
-        state.isLoading = false;
+        // state.isLoading = false;
         state.error = null;
 
         if (state.readingState.isReading && state.readingState.readingBookId) {
@@ -63,18 +63,18 @@ const userBooksSlice = createSlice({
         }
       })
       .addCase(fetchUserBooks.rejected, (state, { payload }) => {
-        state.isLoading = false;
+        // state.isLoading = false;
         state.error = payload;
       })
       .addCase(deleteUserBook.pending, (state) => {
-        state.isLoading = true;
+        // state.isLoading = true;
         state.error = null;
       })
       .addCase(deleteUserBook.fulfilled, (state, { payload }) => {
         state.userBooks = state.userBooks.filter(
           (book) => book._id !== payload.id
         );
-        state.isLoading = false;
+        // state.isLoading = false;
         state.error = null;
 
         if (state.readingState.isReading && state.readingState.readingBookId) {
@@ -90,24 +90,24 @@ const userBooksSlice = createSlice({
         }
       })
       .addCase(deleteUserBook.rejected, (state, { payload }) => {
-        state.isLoading = false;
+        // state.isLoading = false;
         state.error = payload;
       })
       .addCase(fetchBookInfo.pending, (state) => {
-        state.isLoading = true;
+        // state.isLoading = true;
         state.error = null;
       })
       .addCase(fetchBookInfo.fulfilled, (state, { payload }) => {
         state.bookInfo = payload;
-        state.isLoading = false;
+        // state.isLoading = false;
         state.error = null;
       })
       .addCase(fetchBookInfo.rejected, (state, { payload }) => {
-        state.isLoading = false;
+        // state.isLoading = false;
         state.error = payload;
       })
       .addCase(startReadingBook.pending, (state) => {
-        state.isLoading = true;
+        // state.isLoading = true;
         state.error = null;
       })
       .addCase(startReadingBook.fulfilled, (state, { payload }) => {
@@ -116,15 +116,15 @@ const userBooksSlice = createSlice({
           readingBookId: payload._id,
         };
         state.bookInfo = payload;
-        state.isLoading = false;
+        // state.isLoading = false;
         state.error = null;
       })
       .addCase(startReadingBook.rejected, (state, { payload }) => {
-        state.isLoading = false;
+        // state.isLoading = false;
         state.error = payload;
       })
       .addCase(finishReadingBook.pending, (state) => {
-        state.isLoading = true;
+        // state.isLoading = true;
         state.error = null;
       })
       .addCase(finishReadingBook.fulfilled, (state, { payload }) => {
@@ -133,24 +133,24 @@ const userBooksSlice = createSlice({
           readingBookId: null,
         };
         state.bookInfo = payload;
-        state.isLoading = false;
+        // state.isLoading = false;
         state.error = null;
       })
       .addCase(finishReadingBook.rejected, (state, { payload }) => {
-        state.isLoading = false;
+        // state.isLoading = false;
         state.error = payload;
       })
       .addCase(deleteReadingRecord.pending, (state) => {
-        state.isLoading = true;
+        // state.isLoading = true;
         state.error = null;
       })
       .addCase(deleteReadingRecord.fulfilled, (state, { payload }) => {
-        state.isLoading = false;
+        // state.isLoading = false;
         state.bookInfo = payload;
         state.error = null;
       })
       .addCase(deleteReadingRecord.rejected, (state, { payload }) => {
-        state.isLoading = false;
+        // state.isLoading = false;
         state.error = payload;
       });
   },
