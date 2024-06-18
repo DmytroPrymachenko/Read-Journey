@@ -21,7 +21,7 @@ import {
 import VectorSVG from "../../../images/VectorSVG";
 import DeleteRecord from "../../../images/DeleteRecord";
 
-const DiaryItem = ({ progress }) => {
+const DiaryItem = ({ progress, handleDeleteRecord }) => {
   const bookInfo = useSelector(selectBookInfo);
   const formattedDate = format(new Date(progress.startReading), "dd.MM.yyyy");
   const startTime = new Date(progress.startReading);
@@ -88,7 +88,7 @@ const DiaryItem = ({ progress }) => {
                 <DeleteRecordVectorWraper>
                   <DeleteRecordWraper>
                     <VectorSVG />
-                    <DeleteRecordButton>
+                    <DeleteRecordButton onClick={handleDeleteRecord}>
                       <DeleteRecord />
                     </DeleteRecordButton>
                   </DeleteRecordWraper>

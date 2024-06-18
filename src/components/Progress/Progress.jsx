@@ -6,14 +6,14 @@ import { ProgressWraper } from "./ProgressStyled";
 
 // const Test = styled.div``;
 
-const Progress = () => {
+const Progress = ({ setIsTimeLeft }) => {
   return (
     <ProgressWraper>
       <>
         <ReadingForm />
       </>
       <>
-        <ReadingStatistics />
+        <ReadingStatistics setIsTimeLeft={setIsTimeLeft} />
       </>
     </ProgressWraper>
   );

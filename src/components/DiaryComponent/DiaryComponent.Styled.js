@@ -8,6 +8,9 @@ export const ProgressWraper = styled.div`
   width: 100%;
   position: relative;
   overflow-y: auto;
+  @media (min-width: 768px) {
+    height: 252px;
+  }
 
   &::-webkit-scrollbar {
     height: 5px;

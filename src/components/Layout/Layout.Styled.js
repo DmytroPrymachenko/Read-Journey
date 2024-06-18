@@ -7,13 +7,40 @@ export const Container = styled.div`
 
   @media only screen and (min-width: 768px) {
     max-width: 768px;
-    padding: 32px;
+    padding-top: 16px;
+    padding-right: 32px;
+    padding-bottom: 27px;
+    padding-left: 32px;
   }
   @media only screen and (min-width: 1280px) {
     max-width: 1280px;
   }
   @media only screen and (min-width: 1440px) {
     max-width: 1440px;
-    padding: 0 64px;
+    padding-top: 16px;
+    padding-right: 64px;
+    padding-bottom: 27px;
+    padding-left: 64px;
+  }
+`;
+
+export const HeaderContainer = styled.div`
+  max-width: 100%;
+  padding-right: 20px;
+  padding-left: 20px;
+  margin: 0 auto;
+
+  @media only screen and (min-width: 768px) {
+    max-width: 768px;
+    padding-right: 32px;
+    padding-left: 32px;
+  }
+  @media only screen and (min-width: 1280px) {
+    max-width: 1280px;
+  }
+  @media only screen and (min-width: 1440px) {
+    max-width: 1440px;
+    padding-right: 64px;
+    padding-left: 64px;
   }
 `;

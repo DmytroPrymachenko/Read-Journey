@@ -8,7 +8,7 @@ export const recommendedBooksThunk = createAsyncThunk(
       const { data } = await api.get("/books/recommend", {
         params: { title, author, page, limit },
       });
-      // console.log(data);
+      console.log("data1", data);
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(
@@ -122,6 +122,22 @@ export const addBookThunk = createAsyncThunk(
     } catch (error) {
       return thunkAPI.rejectWithValue(
         error.response.data.message ?? error.message
+      );
+    }
+  }
+);
+
+export const deleteReadingRecord = createAsyncThunk(
+  "books/deleteReadingRecord",
+  async ({ bookId, readingId }, thunkAPI) => {
+    try {
+      const { data } = await api.delete(`/books/reading`, {
+        params: { bookId, readingId },
+      });
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(
+        error.response?.data?.message ?? error.message
       );
     }
   }

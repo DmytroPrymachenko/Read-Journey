@@ -7,6 +7,10 @@ export const ContainerRange = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  @media (min-width: 768px) {
+    width: 138px;
+    height: 138px;
+  }
 `;
 
 export const CircularRange = styled.input.attrs({ type: "range" })`
@@ -103,8 +107,12 @@ export const StatisticsComponentWraper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 21px;
-  padding: 20px;
+
   align-items: center;
+  justify-content: center;
+  @media (min-width: 768px) {
+    gap: 16px;
+  }
 `;
 
 export const GreenSquare = styled.div`

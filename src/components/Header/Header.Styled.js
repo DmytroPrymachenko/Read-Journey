@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
 export const HeaderContainer = styled.div`
@@ -6,9 +7,15 @@ export const HeaderContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 20px;
+
   height: 57px;
   margin-top: 20px;
+  padding-right: 20px;
+  padding-left: 20px;
+  @media (min-width: 768px) {
+    padding-right: 16px;
+    padding-left: 16px;
+  }
 `;
 export const HeaderIconUser = styled.div`
   width: 35px;
@@ -35,4 +42,66 @@ export const HeaderButtonBurger = styled.button`
   &:hover {
     transform: scale(1.1);
   }
+`;
+
+export const HeaderDivLink = styled.div`
+  display: flex;
+  gap: 28px;
+`;
+
+export const HeaderLink = styled(NavLink)`
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 112%;
+  letter-spacing: -0.02em;
+  color: #686868;
+  position: relative;
+  cursor: pointer;
+  transition: color 0.5s ease;
+
+  &:hover {
+    color: #f9f9f9;
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 4px;
+    background-color: #4f92f7;
+    border-radius: 8px;
+    transition: width 0.5s ease-in-out;
+  }
+  &.active {
+    color: #f9f9f9;
+  }
+  &.active::before {
+    width: 100%;
+    opacity: 1;
+  }
+
+  &.inactive::before {
+    width: 0;
+    opacity: 0;
+  }
+  transition: transform 0.6s ease;
+
+  &:hover,
+  &:focus {
+    transform: scale(1.3);
+  }
+`;
+export const HeaderTabletLogOut = styled.button`
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 112%;
+  letter-spacing: 0.02em;
+  color: #f9f9f9;
+  border: 1px solid rgba(249, 249, 249, 0.2);
+  border-radius: 30px;
+  padding: 12px 28px;
+  background-color: transparent;
 `;

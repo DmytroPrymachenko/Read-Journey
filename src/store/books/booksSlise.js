@@ -5,6 +5,7 @@ const booksSlice = createSlice({
   name: "books",
   initialState: {
     recommendedBooks: [],
+    totalPages: null,
     isLoading: false,
     error: null,
     path: null,
@@ -22,6 +23,7 @@ const booksSlice = createSlice({
       })
       .addCase(recommendedBooksThunk.fulfilled, (state, { payload }) => {
         state.recommendedBooks = payload.results;
+        state.totalPages = payload.totalPages;
         state.isLoading = false;
         state.error = null;
       })
