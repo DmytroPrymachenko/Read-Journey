@@ -13,6 +13,7 @@ import { ReadingWraper } from "./Reading.Styled";
 
 const ReadingPage = () => {
   const { id } = useParams();
+  console.log(useParams());
   const dispatch = useDispatch();
   const bookInfo = useSelector(selectBookInfo);
   const [isTimeLeft, setIsTimeLeft] = useState(false);

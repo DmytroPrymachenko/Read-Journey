@@ -14,13 +14,14 @@ import { setPath } from "./store/books/booksSlise";
 import RecommendPage from "./pages/RecommendPage/RecommendPage";
 import MyLibraryPage from "./pages/MyLibraryPage/MyLibraryPage";
 import ReadingPage from "./pages/ReadingPage/ReadingPage";
-import LibraryPage from "./pages/LibraryPage/LibraryPage";
+// import LibraryPage from "./pages/LibraryPage/LibraryPage";
 
 function App() {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
   const expireTime = useSelector(selectExpireTime);
   const { pathname } = useLocation();
+  const loading = useSelector((state) => state.loading.loading);
 
   console.log(pathname);
   useEffect(() => {
@@ -48,6 +49,7 @@ function App() {
   }, [dispatch, user, expireTime]);
   return (
     <>
+      {loading && <Loader />}
       <Suspense fallback={<Loader />}>
         <Routes>
           <Route path="/" element={<Layout />}>

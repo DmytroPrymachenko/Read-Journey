@@ -4,12 +4,14 @@ export const BookItem = styled.li`
   display: flex;
   flex-direction: column;
   gap: 8px;
-  width: 137px;
+  width: calc((100% - 8px) / 2);
+  max-width: 137px;
 `;
 export const Cover = styled.div`
   border-radius: 8px;
   width: 100%;
   height: 208px;
+  cursor: pointer;
   border: ${(props) => (props.$image ? "none" : "1px solid #3e3e3e")};
 `;
 export const LibraryItemImg = styled.img`

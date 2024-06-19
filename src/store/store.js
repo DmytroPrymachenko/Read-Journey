@@ -14,6 +14,7 @@ import { authReducer } from "./auth/authSlice";
 import { booksReducer } from "./books/booksSlise";
 import { recommendReducer } from "./recommend/recommendSlise";
 import { userBooksReducer } from "./books/userBooksSlise";
+import { loadingReducer } from "./loading/loadingSlice";
 
 const persistConfig = {
   key: "auth",
@@ -38,7 +39,7 @@ const readingPersistConfig = {
   key: "userBooks",
   version: 1,
   storage,
-  whitelist: ["readingState", "userBooks"],
+  whitelist: ["readingState", "userBooks", "option"],
 };
 
 const recommendPersistedReducer = persistReducer(
@@ -59,6 +60,7 @@ export const store = configureStore({
     books: persistedReducerBooks,
     recommend: recommendPersistedReducer,
     userBooks: readingPersistedReducer,
+    loading: loadingReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

@@ -22,7 +22,7 @@ export const Modal = styled.div`
   border-radius: 12px;
   max-width: 335px;
 `;
-export const CloseButton = styled.div`
+export const CloseButton = styled.button`
   position: absolute;
   top: 16px;
   right: 12px;
