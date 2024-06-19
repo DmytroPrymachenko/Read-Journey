@@ -4,9 +4,13 @@ export const RecommBooksListWraper = styled.div`
   border-radius: 30px;
   background: #1f1f1f;
   padding: 40px 20px;
+  @media (min-width: 768px) {
+    padding: 40px 40px;
+  }
   & > :first-child {
     display: flex;
     justify-content: space-between;
+    padding-bottom: 22px;
 
     & > :first-child {
       font-weight: 700;
@@ -30,22 +34,22 @@ export const RecommBooksListPageButton = styled.button`
 `;
 
 export const RecommBooksListUl = styled.ul`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  /* grid-auto-rows: 1fr; */
-  grid-auto-rows: auto;
+  display: flex;
+  flex-wrap: wrap;
   gap: 23px;
 
   @media (min-width: 768px) {
-    grid-template-columns: repeat(4, 1fr);
+    justify-content: flex-start;
+    gap: 23px;
   }
 
   @media (min-width: 1280px) {
-    grid-template-columns: repeat(5, 1fr);
+    justify-content: flex-start;
+    gap: 20px;
   }
 
   li {
-    min-width: 120px;
+    min-width: 137px;
     display: flex;
     flex-direction: column;
 

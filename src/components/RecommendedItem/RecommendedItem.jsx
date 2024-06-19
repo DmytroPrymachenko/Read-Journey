@@ -8,6 +8,7 @@ import {
 import { selectUserBooks } from "../../store/books/selectors";
 import {
   RecommendedItemImg,
+  RecommendedItemImgWraper,
   RecommendedItemTitlewraper,
 } from "./RecommendedItem.Styled";
 import RecommendedModalItem from "./RecommendedModalItem";
@@ -77,7 +78,9 @@ const RecommendedItem = ({ book }) => {
         />
       )}
       <li key={book._id} onClick={openModal}>
-        <RecommendedItemImg src={book.imageUrl} alt={book.title} />
+        <RecommendedItemImgWraper>
+          <RecommendedItemImg src={book.imageUrl} alt={book.title} />
+        </RecommendedItemImgWraper>
         <RecommendedItemTitlewraper>
           <span>{truncatedTitle}</span>
           <span>{book.author}</span>

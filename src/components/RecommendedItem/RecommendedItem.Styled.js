@@ -1,9 +1,16 @@
 import styled from "styled-components";
-
-export const RecommendedItemImg = styled.img`
+export const RecommendedItemImgWraper = styled.div`
   width: 137px;
   height: 208px;
-  object-fit: contain;
+  /* object-fit: cover;
+  width: 100%;
+  height: 100%;
+  border-radius: 20px; */
+`;
+export const RecommendedItemImg = styled.img`
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
   border-radius: 20px;
 `;
 export const RecommendedItemTitlewraper = styled.div`

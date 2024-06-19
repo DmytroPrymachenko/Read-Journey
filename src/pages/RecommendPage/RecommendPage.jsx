@@ -1,4 +1,4 @@
-import { Test123 } from "./RecommendPage.Styled";
+import { RecommendPageWraper } from "./RecommendPage.Styled";
 import { useEffect, useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -59,7 +59,7 @@ const RecommendPage = () => {
   }, [dispatch, recommendedBooks]);
 
   return (
-    <Test123>
+    <RecommendPageWraper>
       <>
         <>
           <Filter />
@@ -68,7 +68,7 @@ const RecommendPage = () => {
           <RecommBooksList />
         </>
       </>
-    </Test123>
+    </RecommendPageWraper>
   );
 };
 
