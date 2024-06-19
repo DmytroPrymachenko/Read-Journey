@@ -1080,6 +1080,12 @@ attempted value: ${s}
     font-size: 14px;
     line-height: 1.28571;
   }
+
+  &[type="number"]::-webkit-outer-spin-button,
+  &[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
 `,S5=T.span`
   color: #e90516;
   font-size: 10px;
