@@ -97,6 +97,12 @@ export const Input = styled.input`
     font-size: 14px;
     line-height: 1.28571;
   }
+
+  &[type="number"]::-webkit-outer-spin-button,
+  &[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
 `;
 export const ErrorSpan = styled.span`
   color: #e90516;
