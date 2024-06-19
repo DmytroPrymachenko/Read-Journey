@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { FilterSelect } from "./MyBooksFilter.Styled";
 
 const options = [
@@ -7,10 +8,26 @@ const options = [
   { value: "all-books", label: "All books" },
 ];
 
-const MyBooksFilter = ({ selectedOption, setSelectedOption }) => {
+const MyBooksFilter = ({ setSelectedOption }) => {
+  const [currentOption, setCurrentOption] = useState(() => {
+    const savedOption = localStorage.getItem("selectedBookFilter");
+    return savedOption ? JSON.parse(savedOption) : options[3];
+  });
+
+  useEffect(() => {
+    setSelectedOption(currentOption);
+  }, [currentOption, setSelectedOption]);
+
+  const handleChange = (option) => {
+    setSelectedOption(option);
+    setCurrentOption(option);
+
+    localStorage.setItem("selectedBookFilter", JSON.stringify(option));
+  };
+
   return (
     <FilterSelect
-      onChange={setSelectedOption}
+      onChange={handleChange}
       name="filter"
       components={{
         IndicatorSeparator: () => null,
@@ -18,7 +35,7 @@ const MyBooksFilter = ({ selectedOption, setSelectedOption }) => {
       options={options}
       aria-label="Filter for the books"
       placeholder="All books"
-      defaultValue={selectedOption}
+      value={currentOption}
       styles={{
         control: (baseStyles, state) => ({
           ...baseStyles,
@@ -58,7 +75,9 @@ const MyBooksFilter = ({ selectedOption, setSelectedOption }) => {
         option: (b, s) => ({
           ...b,
           color: !s.isSelected ? "var(--input-title)" : "var(--white)",
-          backgroundColor: "var(--input-bg)",
+          backgroundColor: s.isSelected
+            ? "var(--input-bg-selected)"
+            : "var(--input-bg)",
           height: "22px",
           cursor: "pointer",
           "&:last-child": {
@@ -86,17 +105,14 @@ const MyBooksFilter = ({ selectedOption, setSelectedOption }) => {
           },
           "::-webkit-scrollbar-track": {
             borderRadius: "10px",
-
             background: "rgba(255, 255, 255, 0.05)",
           },
           "::-webkit-scrollbar-thumb": {
             borderRadius: "10px",
-
             background: "rgba(18, 20, 23, 0.05)",
           },
           "::-webkit-scrollbar-thumb:hover": {
             borderRadius: "10px",
-
             background: "rgba(7, 8, 9, 0.05)",
           },
         }),

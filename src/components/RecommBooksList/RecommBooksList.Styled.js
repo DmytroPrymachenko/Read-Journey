@@ -7,6 +7,9 @@ export const RecommBooksListWraper = styled.div`
   @media (min-width: 768px) {
     padding: 40px 40px;
   }
+  @media (min-width: 1280px) {
+    padding: 40px 42px;
+  }
   & > :first-child {
     display: flex;
     justify-content: space-between;

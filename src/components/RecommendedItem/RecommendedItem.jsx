@@ -64,9 +64,27 @@ const RecommendedItem = ({ book }) => {
     return transformedWords.join(" ");
   };
 
+  const truncateTitle = (title, maxLength) => {
+    if (title.length <= maxLength) {
+      return transformTitle(title);
+    }
+
+    let truncated = title.substring(0, maxLength).trim();
+
+    if (truncated.endsWith(" ")) {
+      truncated = truncated.slice(0, -1);
+    }
+
+    if (truncated.endsWith(".") || truncated.endsWith(",")) {
+      truncated = truncated.slice(0, -1);
+    }
+
+    return `${transformTitle(truncated)}...`;
+  };
+
   const truncatedTitle =
-    book.title.length > 23
-      ? `${transformTitle(book.title.substring(0, 20))}...`
+    book.title.length > 22
+      ? truncateTitle(book.title, 18)
       : transformTitle(book.title);
   return (
     <>
