@@ -6,6 +6,9 @@ export const BookItem = styled.li`
   gap: 8px;
   width: calc((100% - 8px) / 2);
   max-width: 137px;
+  @media only screen and (min-width: 768px) {
+    gap: 10px;
+  }
 `;
 export const Cover = styled.div`
   border-radius: 8px;
@@ -17,7 +20,8 @@ export const Cover = styled.div`
 export const LibraryItemImg = styled.img`
   border-radius: 8px;
   height: 100%;
-  /* display: ${(props) => (props.$image ? "blok" : "none")}; */
+  width: 100%;
+  object-fit: fill;
 `;
 export const CoverText = styled.p`
   font-weight: 500;
@@ -34,7 +38,6 @@ export const Span = styled.span`
 `;
 export const Description = styled.div`
   display: flex;
-  /* gap: 14px; */
   justify-content: space-between;
   align-items: center;
 `;
@@ -58,6 +61,8 @@ export const Author = styled.p`
   color: var(--input-title);
 `;
 export const DeleteButton = styled.button`
+  height: 28px;
+  align-self: flex-end;
   background: transparent;
   border: none;
 `;

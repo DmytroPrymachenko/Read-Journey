@@ -1,5 +1,4 @@
 import styled from "styled-components";
-// import { ContentWraper, FiltersFormWraper } from "../Filters/Filters.Styled";
 
 export const ContentWrap = styled.div`
   display: flex;
@@ -8,11 +7,29 @@ export const ContentWrap = styled.div`
   background: #1f1f1f;
   border-radius: 30px;
   padding: 18px 20px 20px;
+  @media only screen and (min-width: 768px) {
+    flex-direction: row;
+    padding: 32px;
+    gap: 32px;
+  }
+  @media only screen and (min-width: 1280px) {
+    flex-direction: column;
+    padding: 40px 20px 20px;
+    gap: 78px;
+  }
 `;
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
   gap: 20px;
+  @media only screen and (min-width: 768px) {
+    width: 295px;
+    gap: 38px;
+  }
+  @media only screen and (min-width: 1280px) {
+    width: 313px;
+    gap: 20px;
+  }
 `;
 export const FiltersFormWrap = styled.div`
   display: flex;
@@ -25,19 +42,20 @@ export const FiltersTitle = styled.h3`
   padding-left: 13px;
   font-weight: 500;
   font-size: 10px;
-  line-height: 120%;
+  line-height: 1.2;
   letter-spacing: -0.02em;
   color: #f9f9f9;
+  @media only screen and (min-width: 768px) {
+    font-size: 14px;
+    line-height: 1.28571;
+  }
 `;
-// export const Rrrr = styled.div``;
-
 export const InputWrap = styled.ul`
   display: flex;
   flex-direction: column;
   gap: 8px;
   max-width: 472px;
   @media only screen and (min-width: 768px) {
-    /* gap: 14px; */
   }
 `;
 export const InputContainer = styled.li`
@@ -66,6 +84,7 @@ export const InputTitle = styled.p`
   line-height: 1.33333;
   letter-spacing: -0.02em;
   text-align: center;
+  white-space: nowrap;
   @media only screen and (min-width: 768px) {
     padding: 16px 0 16px 14px;
     font-size: 14px;
@@ -77,13 +96,17 @@ export const Input = styled.input`
   border-radius: 0 12px 12px 0;
   background: var(--input-bg);
   color: var(--white);
-  /* width: 100%; */
   outline: none;
   border: none;
   font-weight: 500;
   font-size: 12px;
   line-height: 1.33333;
   letter-spacing: -0.02em;
+  &[type="number"]::-webkit-outer-spin-button,
+  &[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
   &::placeholder {
     background: var(--input-bg);
     color: var(--white);
@@ -93,15 +116,10 @@ export const Input = styled.input`
     color: var(--white);
   }
   @media only screen and (min-width: 768px) {
+    max-width: 145px;
     padding: 16px 16px 16px 0;
     font-size: 14px;
     line-height: 1.28571;
-  }
-
-  &[type="number"]::-webkit-outer-spin-button,
-  &[type="number"]::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
   }
 `;
 export const ErrorSpan = styled.span`
@@ -114,12 +132,16 @@ export const SubmitButton = styled.button`
   border: 1px solid rgba(249, 249, 249, 0.2);
   border-radius: 30px;
   padding: 9px 20px;
-  /* cursor: pointer; */
   background: transparent;
   align-self: flex-start;
   font-weight: 700;
   font-size: 14px;
   line-height: 1.29;
   letter-spacing: 0.02em;
-  color: #f9f9f9;
+  color: var(--white);
+  @media only screen and (min-width: 768px) {
+    font-size: 16px;
+    line-height: 1.125;
+    padding: 11px 28px;
+  }
 `;
