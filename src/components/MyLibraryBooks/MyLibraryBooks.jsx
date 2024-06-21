@@ -5,6 +5,7 @@ import bookMobile from "../../images/myLibraryBooksImages/bookMobile.png";
 import bookMobile2x from "../../images/myLibraryBooksImages/bookMobile@2x.png";
 import {
   selectOption,
+  selectPrevUserBooks,
   selectUserBooks,
   selectfilteredUserBooks,
 } from "../../store/books/selectors";
@@ -31,17 +32,19 @@ export const MyLibraryBooks = () => {
   const filteredUserBooks = useSelector(selectfilteredUserBooks);
   const option = useSelector(selectOption);
   const [selectedOption, setSelectedOption] = useState(option);
+  const prevUserBooks = useSelector(selectPrevUserBooks);
   const dispatch = useDispatch();
   console.log(selectedOption);
 
   useEffect(() => {
-    dispatch(setOption(selectedOption));
     console.log(selectedOption);
-    if (selectedOption) {
+    dispatch(setOption(selectedOption));
+    console.log(prevUserBooks.length, userBooks.length);
+    if (selectedOption || prevUserBooks.length !== userBooks.length) {
       dispatch(getfilteredUserBooks(selectedOption.value));
       console.log(selectedOption.value);
     }
-  }, [dispatch, selectedOption]);
+  }, [dispatch, selectedOption, prevUserBooks, userBooks]);
 
   return (
     <MyLibraryWrap $length={userBooks?.length}>
