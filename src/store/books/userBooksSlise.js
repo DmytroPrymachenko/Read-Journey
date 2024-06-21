@@ -74,6 +74,9 @@ const userBooksSlice = createSlice({
         state.userBooks = state.userBooks.filter(
           (book) => book._id !== payload.id
         );
+        if (state.bookInfo._id === payload.id) {
+          state.bookInfo = null;
+        }
         // state.isLoading = false;
         state.error = null;
 
