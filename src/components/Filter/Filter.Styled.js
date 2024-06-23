@@ -148,3 +148,24 @@ export const WorkoutLink = styled(NavLink)`
     transform: scale(1.1);
   }
 `;
+
+export const QuoteSpan = styled.span`
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 129%;
+  letter-spacing: -0.02em;
+  color: #686868;
+
+  & > span {
+    color: #f9f9f9;
+  }
+`;
+export const BooksDextotWraper = styled.div`
+  display: flex;
+
+  gap: 14px;
+  background: #262626;
+  border-radius: 12px;
+  align-items: center;
+  padding: 20px;
+`;

@@ -1,10 +1,10 @@
 import { useNavigate } from "react-router-dom";
-import CloseSVG from "../../images/CloseSVG";
+import CloseSVG from "../../../images/CloseSVG";
 import {
   CoverText,
   LibraryItemImg,
   Span,
-} from "../LibraryItem/LibraryItem.Styled";
+} from "../../LibraryItem/LibraryItem.Styled";
 import {
   Author,
   CloseButton,
@@ -13,10 +13,7 @@ import {
   Modal,
   Overlay,
   Pages,
-  //   Picture,
-  //   Span,
   StartReadingtButton,
-  //   Text,
   TextWrap,
   Title,
 } from "./StartReadingModal.Styled";

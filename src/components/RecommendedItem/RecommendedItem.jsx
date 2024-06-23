@@ -11,7 +11,8 @@ import {
   RecommendedItemImgWraper,
   RecommendedItemTitlewraper,
 } from "./RecommendedItem.Styled";
-import RecommendedModalItem from "./RecommendedModalItem";
+import RecommendedModalItem from "../Modal/RecommendedModal/RecommendedModalItem";
+import Backdrop from "../Backdrop/Backdrop";
 
 const RecommendedItem = ({ book }) => {
   const [isModalItem, setIsModalItem] = useState(false);
@@ -89,11 +90,14 @@ const RecommendedItem = ({ book }) => {
   return (
     <>
       {isModalItem && (
-        <RecommendedModalItem
-          closeModal={closeModal}
-          book={book}
-          handleAddBook={handleAddBook}
-        />
+        <>
+          <Backdrop closeModal={closeModal} />
+          <RecommendedModalItem
+            closeModal={closeModal}
+            book={book}
+            handleAddBook={handleAddBook}
+          />
+        </>
       )}
       <li key={book._id} onClick={openModal}>
         <RecommendedItemImgWraper>

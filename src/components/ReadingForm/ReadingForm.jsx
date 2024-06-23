@@ -66,30 +66,42 @@ const ReadingForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(handleReading)}>
-      <FiltersFormWraper>
-        <FiltersSpan>
+    <>
+      <form onSubmit={handleSubmit(handleReading)}>
+        <FiltersFormWraper>
+          <FiltersSpan>
+            {readingInfo.isReading && readingInfo.readingBookId === id
+              ? "Stop page:"
+              : "Start page:"}
+          </FiltersSpan>
+          <FiltersInputWraper>
+            <FiltersInput
+              {...register("page", {
+                validate: (value) => {
+                  if (value > bookInfo.totalPages) {
+                    toast.error(
+                      `You cannot enter a page greater than the maximum number of ${bookInfo.totalPages} pages`
+                    );
+                    return false;
+                  }
+                  return true;
+                },
+              })}
+              type="text"
+              id="page"
+              placeholder="Enter page number"
+            />
+            <FiltersInputSpan>Page number:</FiltersInputSpan>
+          </FiltersInputWraper>
+        </FiltersFormWraper>
+
+        <FiltersButton type="submit">
           {readingInfo.isReading && readingInfo.readingBookId === id
             ? "Stop page:"
             : "Start page:"}
-        </FiltersSpan>
-        <FiltersInputWraper>
-          <FiltersInput
-            {...register("page")}
-            type="text"
-            id="page"
-            placeholder="Enter page number"
-          />
-          <FiltersInputSpan>Page number:</FiltersInputSpan>
-        </FiltersInputWraper>
-      </FiltersFormWraper>
-
-      <FiltersButton type="submit">
-        {readingInfo.isReading && readingInfo.readingBookId === id
-          ? "Stop page:"
-          : "Start page:"}
-      </FiltersButton>
-    </form>
+        </FiltersButton>
+      </form>
+    </>
   );
 };
 

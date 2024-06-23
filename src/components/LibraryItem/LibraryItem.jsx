@@ -14,9 +14,10 @@ import {
 import { deleteUserBook } from "../../store/books/operations";
 import TrashCanSVG from "../../images/myLibraryBooksImages/TrashCanSVG";
 import { createPortal } from "react-dom";
-import { StartReadingModal } from "../StartReadingModal/StartReadingModal";
+
 import { useState } from "react";
 import { cutString } from "../../helpers/cutString";
+import { StartReadingModal } from "../Modal/StartReadingModal/StartReadingModal";
 
 const LibraryItem = ({ book }) => {
   const dispatch = useDispatch();

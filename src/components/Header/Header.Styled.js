@@ -9,12 +9,14 @@ export const HeaderContainer = styled.div`
   align-items: center;
 
   height: 57px;
-  margin-top: 20px;
+
   padding-right: 20px;
   padding-left: 20px;
   @media (min-width: 768px) {
     padding-right: 16px;
     padding-left: 16px;
+
+    height: 74px;
   }
 `;
 export const HeaderIconUser = styled.div`
@@ -104,4 +106,16 @@ export const HeaderTabletLogOut = styled.button`
   border-radius: 30px;
   padding: 12px 28px;
   background-color: transparent;
+`;
+export const HeaderLogoWraper = styled.div`
+  display: flex;
+  gap: 4px;
+  & > :nth-child(2) {
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 100%;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: #f9f9f9;
+  }
 `;

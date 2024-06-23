@@ -1,11 +1,12 @@
 import { useDispatch, useSelector } from "react-redux";
-import Logo from "../../images/Logo";
+import Logo from "../../images/svg/logo/Logo";
 import {
   HeaderButtonBurger,
   HeaderContainer,
   HeaderDivLink,
   HeaderIconUser,
   HeaderLink,
+  HeaderLogoWraper,
   HeaderTabletLogOut,
   HeaderUserContainer,
 } from "./Header.Styled";
@@ -48,10 +49,12 @@ const Header = () => {
   };
 
   const [isTabletView, setIsTabletView] = useState(window.innerWidth >= 768);
+  const [isDextopView, setIsDextopView] = useState(window.innerWidth >= 1280);
 
   useEffect(() => {
     const handleResize = () => {
       setIsTabletView(window.innerWidth >= 768);
+      setIsDextopView(window.innerWidth >= 1280);
     };
 
     window.addEventListener("resize", handleResize);
@@ -76,7 +79,10 @@ const Header = () => {
         )}
       </>
       <HeaderContainer>
-        <Logo />
+        <HeaderLogoWraper>
+          <Logo />
+          {isDextopView && <span>read journey</span>}
+        </HeaderLogoWraper>
         <>
           {isTabletView ? (
             <>

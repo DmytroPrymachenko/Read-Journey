@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import Logo from "../../images/Logo";
-import LogoTitleSvg from "../../images/LogoTitleSvg";
+import Logo from "../../images/svg/logo/Logo";
+import LogoTitleSvg from "../../images/svg/logo/LogoTitleSvg";
 import ErrorSvg from "../../images/authIcons/ErrorSvg";
 import OkSvg from "../../images/authIcons/OkSvg";
 

@@ -37,11 +37,11 @@ export const RecommendedItemTitlewraper = styled.div`
 `;
 
 export const RecommendedModalItemWraper = styled.div`
-  min-width: 300px;
-
+  width: 335px;
+  z-index: 10;
   /* max-width: 472px; */
   background-color: #1f1f1f;
-  padding: 40px 70px;
+  padding: 40px;
   border-radius: 12px;
   position: fixed;
   top: 50%;
@@ -56,6 +56,9 @@ export const RecommendedModalItemContantWraper = styled.div`
   flex-direction: column;
   align-items: center;
   text-align: center;
+  max-width: 250px;
+  gap: 4px;
+  padding-bottom: 20px;
 
   & > :nth-child(1) {
     font-weight: 700;

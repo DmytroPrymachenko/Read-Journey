@@ -26,6 +26,7 @@ export const Container = styled.div`
 
 export const HeaderContainer = styled.div`
   max-width: 100%;
+  padding-top: 20px;
   padding-right: 20px;
   padding-left: 20px;
   margin: 0 auto;
@@ -34,6 +35,7 @@ export const HeaderContainer = styled.div`
     max-width: 768px;
     padding-right: 32px;
     padding-left: 32px;
+    padding-top: 32px;
   }
   @media only screen and (min-width: 1280px) {
     max-width: 1280px;

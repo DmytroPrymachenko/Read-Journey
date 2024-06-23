@@ -36,10 +36,12 @@ const ReadingPage = () => {
     );
   }
   return (
-    <ReadingWraper>
-      <Progress setIsTimeLeft={setIsTimeLeft} />
-      <ReadingBook isTimeLeft={isTimeLeft} />
-    </ReadingWraper>
+    <>
+      <ReadingWraper>
+        <Progress setIsTimeLeft={setIsTimeLeft} />
+        <ReadingBook isTimeLeft={isTimeLeft} />
+      </ReadingWraper>
+    </>
   );
 };
 

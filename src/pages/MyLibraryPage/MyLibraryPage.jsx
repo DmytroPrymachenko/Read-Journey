@@ -8,6 +8,7 @@ import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { AddBookModal } from "../../components/AddBookModal/AddBookModal";
+import Backdrop from "../../components/Backdrop/Backdrop";
 
 const MyLibraryPage = () => {
   const dispatch = useDispatch();
@@ -61,6 +62,17 @@ const MyLibraryPage = () => {
     dispatch(fetchUserBooks());
   }, [dispatch]);
 
+  // useEffect(() => {
+  //   if (modal) {
+  //     document.body.style.overflow = "hidden";
+  //   } else {
+  //     document.body.style.overflow = "auto";
+  //   }
+  //   return () => {
+  //     document.body.style.overflow = "auto";
+  //   };
+  // }, [modal]);
+
   return (
     <PageContainer>
       <Dashboard
@@ -76,7 +88,13 @@ const MyLibraryPage = () => {
       />
       <MyLibraryBooks />
       {modal &&
-        createPortal(<AddBookModal setModal={setModal} />, document.body)}
+        createPortal(
+          <>
+            <Backdrop />
+            <AddBookModal setModal={setModal} />
+          </>,
+          document.body
+        )}
     </PageContainer>
   );
 };
