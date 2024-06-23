@@ -1,7 +1,7 @@
 export const selectRecommendedBooks = (state) => state.books.recommendedBooks;
 
 export const selectTotalPages = (state) => state.books.totalPages;
-
+export const selectPrevUserBooks = (state) => state.userBooks.prevUserBooks;
 export const selectRecommended = (state) => state.recommend;
 export const selectUserBooks = (state) => state.userBooks.userBooks;
 export const selectBookInfo = (state) => state.userBooks.bookInfo;

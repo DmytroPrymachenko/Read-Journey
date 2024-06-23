@@ -43,6 +43,9 @@ const MyBooksFilter = ({ setSelectedOption }) => {
           boxShadow: state.isFocused ? "#3e3e3e" : "#3e3e3e",
           borderRadius: "12px",
           width: "120px",
+          "@media only screen and (min-width: 768px)": {
+            width: "153px",
+          },
           height: "40px",
           cursor: "pointer",
           border: "1px solid #3e3e3e",
@@ -62,26 +65,22 @@ const MyBooksFilter = ({ setSelectedOption }) => {
         }),
         dropdownIndicator: (b, s) => ({
           ...b,
-          color: s.isFocused ? "var(--white)" : "var(--white)",
-          transform: s.isFocused ? "rotate(180deg)" : "rotate(0deg)",
+          color: "var(--white)",
+          transform: s.selectProps.menuIsOpen
+            ? "rotate(180deg)"
+            : "rotate(0deg)",
           ":hover": {
             color: "var(--white)",
-            transform: "rotate(180deg)",
-          },
-          ":active": {
-            transform: "rotate(180deg)",
           },
         }),
         option: (b, s) => ({
           ...b,
           color: !s.isSelected ? "var(--input-title)" : "var(--white)",
-          backgroundColor: s.isSelected
-            ? "var(--input-bg-selected)"
-            : "var(--input-bg)",
-          height: "22px",
+          backgroundColor: "var(--input-bg)",
           cursor: "pointer",
+          padding: "0 0 8px 0",
           "&:last-child": {
-            paddingBottom: "28px",
+            paddingBottom: "0px",
           },
           ":active": {
             color: s.isSelected ? "var(--white)" : "var(--input-title)",
@@ -91,6 +90,7 @@ const MyBooksFilter = ({ setSelectedOption }) => {
           ...styles,
           borderRadius: "12px",
           backgroundColor: "var(--input-bg)",
+          padding: "14px",
         }),
         placeholder: (defaultStyles) => ({
           ...defaultStyles,

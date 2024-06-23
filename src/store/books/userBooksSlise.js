@@ -12,6 +12,7 @@ const userBooksSlice = createSlice({
   name: "userBooks",
   initialState: {
     userBooks: [],
+    prevUserBooks: [],
     filteredUserBooks: [],
     option: null,
     bookInfo: null,
@@ -46,6 +47,7 @@ const userBooksSlice = createSlice({
         state.error = null;
       })
       .addCase(fetchUserBooks.fulfilled, (state, { payload }) => {
+        state.prevUserBooks = state.userBooks;
         state.userBooks = payload;
         // state.isLoading = false;
         state.error = null;
@@ -74,6 +76,9 @@ const userBooksSlice = createSlice({
         state.userBooks = state.userBooks.filter(
           (book) => book._id !== payload.id
         );
+        // if (state.bookInfo._id === payload.id) {
+        //   state.bookInfo = null;
+        // }
         // state.isLoading = false;
         state.error = null;
 

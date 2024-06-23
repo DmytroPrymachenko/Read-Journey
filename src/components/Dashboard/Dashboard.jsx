@@ -72,7 +72,6 @@ export const Dashboard = ({
                         }
                       )}
                     ></Input>
-                    {/* {console.log(register(el.name))} */}
                   </Label>
                   <ErrorSpan>
                     {errors[register(el.name).name]?.message}
@@ -81,12 +80,7 @@ export const Dashboard = ({
               ))}
             </InputWrap>
           </FiltersFormWrap>
-          <SubmitButton
-            name="submit"
-            type="submit"
-            aria-label={titleButton}
-            // onSubmit={handleClick}
-          >
+          <SubmitButton name="submit" type="submit" aria-label={titleButton}>
             {titleButton}
           </SubmitButton>
         </Form>

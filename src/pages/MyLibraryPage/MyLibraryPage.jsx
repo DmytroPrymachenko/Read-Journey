@@ -13,6 +13,7 @@ import Backdrop from "../../components/Backdrop/Backdrop";
 const MyLibraryPage = () => {
   const dispatch = useDispatch();
   const [modal, setModal] = useState(false);
+  const [size, setSize] = useState(false);
 
   const inputs = [
     {
@@ -72,11 +73,24 @@ const MyLibraryPage = () => {
   //     document.body.style.overflow = "auto";
   //   };
   // }, [modal]);
+  useEffect(() => {
+    function handlesize() {
+      if (window.innerWidth > 1279) {
+        setSize(true);
+      } else {
+        setSize(false);
+      }
+    }
+    window.addEventListener("resize", handlesize);
+    return () => {
+      window.removeEventListener("resize", handlesize);
+    };
+  }, []);
 
   return (
     <PageContainer>
       <Dashboard
-        title={"Filters:"}
+        title={size ? "Create your library:" : "Filters:"}
         inputs={inputs}
         titleButton={"Add book"}
         secondPart={"Recommended books"}
