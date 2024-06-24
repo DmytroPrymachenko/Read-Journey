@@ -2,16 +2,47 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectBookProgress } from "../../store/books/selectors";
 import { DiaryComponentUl, ProgressWraper } from "./DiaryComponent.Styled";
 import DiaryItem from "./DiaryItem/DiaryItem";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { deleteReadingRecord } from "../../store/books/operations";
 import { useParams } from "react-router-dom";
 
 const DiaryComponent = () => {
   const bookProgress = useSelector(selectBookProgress);
-  console.log("bookProgress", bookProgress);
+  const [filteredProgress, setFilteredProgress] = useState([]);
   const dispatch = useDispatch();
   const { id } = useParams();
+
+  useEffect(() => {
+    if (bookProgress.length > 0) {
+      const groupedAndSortedProgress = groupAndSortProgressByDate(bookProgress);
+      setFilteredProgress(groupedAndSortedProgress);
+    }
+  }, [bookProgress]);
+
+  const groupAndSortProgressByDate = (progressArray) => {
+    const grouped = progressArray.reduce((acc, progress) => {
+      const date = new Date(progress.startReading).toLocaleDateString();
+      if (!acc[date]) {
+        acc[date] = [];
+      }
+      acc[date].push(progress);
+      return acc;
+    }, {});
+
+    const sortedDates = Object.keys(grouped).sort(
+      (a, b) => new Date(b) - new Date(a)
+    );
+
+    const sortedProgress = sortedDates.map((date) => ({
+      date,
+      progress: grouped[date].sort(
+        (a, b) => new Date(b.startReading) - new Date(a.startReading)
+      ),
+    }));
+
+    return sortedProgress;
+  };
 
   const handleDeleteRecord = async (readingId) => {
     try {
@@ -21,6 +52,7 @@ const DiaryComponent = () => {
       toast.error("Error deleting reading record: " + error.message);
     }
   };
+  console.log(filteredProgress);
 
   return (
     <>

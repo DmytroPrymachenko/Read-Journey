@@ -17,13 +17,10 @@ import { createPortal } from "react-dom";
 
 import { useState } from "react";
 import { cutString } from "../../helpers/cutString";
-<<<<<<< HEAD
 import { StartReadingModal } from "../Modal/StartReadingModal/StartReadingModal";
-=======
 import { selectExpireTime } from "../../store/auth/selectors";
 import { currentThunk, refreshTokensThunk } from "../../store/auth/operations";
 import { toast } from "react-toastify";
->>>>>>> 483561c12fed4c78f237205ef5ad83c9ba4577ea
 
 const LibraryItem = ({ book }) => {
   const dispatch = useDispatch();
