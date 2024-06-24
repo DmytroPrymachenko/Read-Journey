@@ -15,6 +15,7 @@ import {
   DiaryDatePercentageWraper,
   DiaryDateRightWraper,
   DiaryDateWraper,
+  DiaryItemLi,
   PerHour,
   ReadingSpeed,
 } from "./DiaryItem.Styled";
@@ -56,34 +57,16 @@ const DiaryItem = ({ progress, handleDeleteRecord }) => {
 
   return (
     <>
-      {/* <DiaryDateLi>
+      <DiaryItemLi>
         <>
-          <DiaryDateLeftWraper>
-            <>
-              <>
-                <BlackWhiteSquareWrapper>
-                  <BlackWhiteSquare />
-                </BlackWhiteSquareWrapper>
-              </>
-              <>
-                <DiaryDateWraper>
-                  <span>{formattedDate}</span>
-
-                  <DiaryDatePercentageWraper>
-                    <span>{percentageRead}%</span>
-                    <span>{durationText}</span>
-                  </DiaryDatePercentageWraper>
-                </DiaryDateWraper>
-              </>
-            </>
-          </DiaryDateLeftWraper>
+          <DiaryDatePercentageWraper>
+            <span>{percentageRead}%</span>
+            <span>{durationText}</span>
+          </DiaryDatePercentageWraper>
         </>
         <>
           <DiaryDateRightWraper>
             <>
-              <>
-                <DeleteRecordPagesSpan>{pagesRead} pages</DeleteRecordPagesSpan>
-              </>
               <>
                 <DeleteRecordVectorWraper>
                   <DeleteRecordWraper>
@@ -102,8 +85,56 @@ const DiaryItem = ({ progress, handleDeleteRecord }) => {
             </>
           </DiaryDateRightWraper>
         </>
-      </DiaryDateLi> */}
+      </DiaryItemLi>
     </>
+    // <>
+    //   <>
+    //     <>
+    //       <>
+    //         <>
+    //           <>
+    //             <BlackWhiteSquareWrapper>
+    //               <BlackWhiteSquare />
+    //             </BlackWhiteSquareWrapper>
+    //           </>
+    //           <>
+    //             <DiaryDateWraper>
+    //               <span>{formattedDate}</span>
+
+    //               <DiaryDatePercentageWraper>
+    //                 <span>{percentageRead}%</span>
+    //                 <span>{durationText}</span>
+    //               </DiaryDatePercentageWraper>
+    //             </DiaryDateWraper>
+    //           </>
+    //         </>
+    //       </>
+    //     </>
+    //     <>
+    //       <DiaryDateRightWraper>
+    //         <>
+    //           <>
+    //             <DeleteRecordPagesSpan>{pagesRead} pages</DeleteRecordPagesSpan>
+    //           </>
+    //           <>
+    //             <DeleteRecordVectorWraper>
+    //               <DeleteRecordWraper>
+    //                 <VectorSVG />
+    //                 <DeleteRecordButton onClick={handleDeleteRecord}>
+    //                   <DeleteRecord />
+    //                 </DeleteRecordButton>
+    //               </DeleteRecordWraper>
+
+    //               <DeleteRecordPageHourDiv>
+    //                 <ReadingSpeed>{formattedReadingSpeed} pages</ReadingSpeed>
+    //                 <PerHour>per hour</PerHour>
+    //               </DeleteRecordPageHourDiv>
+    //             </DeleteRecordVectorWraper>
+    //           </>
+    //         </>
+    //       </DiaryDateRightWraper>
+    //     </>
+    //   </DiaryDateLi>
   );
 };
 

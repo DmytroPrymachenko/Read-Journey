@@ -59,7 +59,7 @@ const DiaryComponent = () => {
     <>
       <ProgressWraper>
         <>
-          <ul>
+          <DiaryComponentUl>
             {filteredProgress.map((group) => (
               <DiaryList
                 key={group.date}
@@ -69,7 +69,7 @@ const DiaryComponent = () => {
                 }
               />
             ))}
-          </ul>
+          </DiaryComponentUl>
         </>
       </ProgressWraper>
     </>

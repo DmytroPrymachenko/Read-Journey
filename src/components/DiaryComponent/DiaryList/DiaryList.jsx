@@ -5,6 +5,8 @@ import {
   BlackWhiteSquareWrapper,
   DiaryDateLi,
   DiaryDateWraper,
+  DiaryListUl,
+  DiaryListWraper,
 } from "../DiaryItem/DiaryItem.Styled";
 
 const DiaryList = ({ group, handleDeleteRecord }) => {
@@ -20,18 +22,17 @@ const DiaryList = ({ group, handleDeleteRecord }) => {
   console.log("group", group);
   return (
     <DiaryDateLi>
-      <>
+      <DiaryListWraper>
         <BlackWhiteSquareWrapper>
           <BlackWhiteSquare />
         </BlackWhiteSquareWrapper>
-      </>
 
-      <DiaryDateWraper>
-        <span>{group.date}</span>
-        <span>{pagesRead} pages</span>
-      </DiaryDateWraper>
-
-      <ul>
+        <DiaryDateWraper>
+          <span>{group.date}</span>
+          <span>{pagesRead} pages</span>
+        </DiaryDateWraper>
+      </DiaryListWraper>
+      <DiaryListUl>
         {group.progress.map((progress) => (
           <DiaryItem
             key={progress._id}
@@ -39,7 +40,7 @@ const DiaryList = ({ group, handleDeleteRecord }) => {
             handleDeleteRecord={() => handleDeleteRecord(progress._id)}
           />
         ))}
-      </ul>
+      </DiaryListUl>
     </DiaryDateLi>
   );
 };

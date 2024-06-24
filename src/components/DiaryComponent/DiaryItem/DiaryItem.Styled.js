@@ -20,14 +20,28 @@ export const DiaryDateWraper = styled.div`
     letter-spacing: -0.02em;
     text-align: start;
     color: #686868;
+    @media (min-width: 768px) {
+      font-size: 14px;
+      line-height: 129%;
+      letter-spacing: -0.02em;
+      text-align: center;
+      color: #686868;
+    }
   }
 `;
 export const DiaryDateLi = styled.li`
   display: flex;
+  flex-direction: column;
   /* width: 100%;
   justify-content: space-between; */
 `;
 
+export const DiaryListWraper = styled.div`
+  display: flex;
+
+  /* width: 100%;
+  justify-content: space-between; */
+`;
 export const DiaryDatePercentageWraper = styled.div`
   display: flex;
   flex-direction: column;
@@ -122,4 +136,16 @@ export const BlackWhiteSquareWrapper = styled.div`
 
     height: 100%;
   }
+`;
+
+export const DiaryItemLi = styled.li`
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+`;
+export const DiaryListUl = styled.ul`
+  padding-left: 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
 `;

@@ -42,35 +42,7 @@ export const ProgressWraper = styled.div`
     background-color: #262626;
   }
 `;
-// *::-webkit-scrollbar {
-//   height: 5px;
-//   width: 5px;
-// }
-// *::-webkit-scrollbar-track {
-//   border-radius: 15px;
-//   background-color: #1F1F1F;
-// }
 
-// *::-webkit-scrollbar-track:hover {
-//   background-color: #1F1F1F;
-// }
-
-// *::-webkit-scrollbar-track:active {
-//   background-color: #1F1F1F;
-// }
-
-// *::-webkit-scrollbar-thumb {
-//   border-radius: 5px;
-//   background-color: #262626;
-// }
-
-// *::-webkit-scrollbar-thumb:hover {
-//   background-color: #262626;
-// }
-
-// *::-webkit-scrollbar-thumb:active {
-//   background-color: #262626;
-// }
 export const DiaryComponentUl = styled.ul`
   display: flex;
   flex-direction: column;
