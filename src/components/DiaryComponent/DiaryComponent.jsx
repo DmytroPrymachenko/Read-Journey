@@ -34,7 +34,8 @@ const DiaryComponent = () => {
       (a, b) => new Date(b) - new Date(a)
     );
 
-    const sortedProgress = sortedDates.map((date) => ({
+    // Reverse the sortedDates array to get descending order
+    const sortedProgress = sortedDates.reverse().map((date) => ({
       date,
       progress: grouped[date].sort(
         (a, b) => new Date(b.startReading) - new Date(a.startReading)
