@@ -56,7 +56,7 @@ const DiaryItem = ({ progress, handleDeleteRecord }) => {
 
   return (
     <>
-      <DiaryDateLi>
+      {/* <DiaryDateLi>
         <>
           <DiaryDateLeftWraper>
             <>
@@ -102,7 +102,7 @@ const DiaryItem = ({ progress, handleDeleteRecord }) => {
             </>
           </DiaryDateRightWraper>
         </>
-      </DiaryDateLi>
+      </DiaryDateLi> */}
     </>
   );
 };

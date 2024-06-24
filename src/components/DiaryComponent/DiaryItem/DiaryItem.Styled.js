@@ -2,9 +2,9 @@ import styled from "styled-components";
 
 export const DiaryDateWraper = styled.div`
   display: flex;
-  flex-direction: column;
-  gap: 16px;
-
+  justify-content: space-between;
+  width: 100%;
+  padding-left: 10px;
   & > :first-child {
     font-weight: 700;
     font-size: 12px;
@@ -13,11 +13,19 @@ export const DiaryDateWraper = styled.div`
     color: #f9f9f9;
     height: 16px;
   }
+  & > :last-child {
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 133%;
+    letter-spacing: -0.02em;
+    text-align: start;
+    color: #686868;
+  }
 `;
 export const DiaryDateLi = styled.li`
   display: flex;
-  width: 100%;
-  justify-content: space-between;
+  /* width: 100%;
+  justify-content: space-between; */
 `;
 
 export const DiaryDatePercentageWraper = styled.div`

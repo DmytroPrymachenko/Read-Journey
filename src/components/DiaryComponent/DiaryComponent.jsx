@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { deleteReadingRecord } from "../../store/books/operations";
 import { useParams } from "react-router-dom";
+import DiaryList from "./DiaryList/DiaryList";
 
 const DiaryComponent = () => {
   const bookProgress = useSelector(selectBookProgress);
@@ -34,7 +35,6 @@ const DiaryComponent = () => {
       (a, b) => new Date(b) - new Date(a)
     );
 
-    // Reverse the sortedDates array to get descending order
     const sortedProgress = sortedDates.reverse().map((date) => ({
       date,
       progress: grouped[date].sort(
@@ -59,15 +59,17 @@ const DiaryComponent = () => {
     <>
       <ProgressWraper>
         <>
-          <DiaryComponentUl>
-            {[...bookProgress].reverse().map((progress) => (
-              <DiaryItem
-                key={progress._id}
-                progress={progress}
-                handleDeleteRecord={() => handleDeleteRecord(progress._id)}
+          <ul>
+            {filteredProgress.map((group) => (
+              <DiaryList
+                key={group.date}
+                group={group}
+                handleDeleteRecord={(readingId) =>
+                  handleDeleteRecord(group.date, readingId)
+                }
               />
             ))}
-          </DiaryComponentUl>
+          </ul>
         </>
       </ProgressWraper>
     </>
