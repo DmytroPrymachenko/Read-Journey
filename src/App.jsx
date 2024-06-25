@@ -20,7 +20,6 @@ import { setPath } from "./store/books/booksSlise";
 import RecommendPage from "./pages/RecommendPage/RecommendPage";
 import MyLibraryPage from "./pages/MyLibraryPage/MyLibraryPage";
 import ReadingPage from "./pages/ReadingPage/ReadingPage";
-// import LibraryPage from "./pages/LibraryPage/LibraryPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -30,7 +29,6 @@ function App() {
   const loading = useSelector((state) => state.loading.loading);
   const navigate = useNavigate();
 
-  console.log(pathname);
   useEffect(() => {
     if (pathname === "/register" || pathname === "/login") {
       return;
@@ -56,10 +54,10 @@ function App() {
   }, [dispatch, user, expireTime]);
 
   useEffect(() => {
-    if (!user && pathname !== "/login" && pathname !== "/register") {
-      navigate("/login");
+    if (pathname === "/") {
+      navigate("/recommended");
     }
-  }, [user, pathname, navigate]);
+  }, [pathname, navigate]);
 
   return (
     <>
