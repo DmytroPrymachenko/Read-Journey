@@ -144,7 +144,7 @@ export const DiaryListUl = styled.ul`
     top: -17px;
     left: 6px;
     width: 2px;
-    height: 130%;
+    height: 100%;
     background-color: #1f1f1f;
   }
 `;
